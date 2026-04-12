@@ -22,21 +22,21 @@ export default function Seccion2() {
   const fallbackServices = [
     {
       id: "srv-1",
-      name: "Kinesiologia a domicilio",
-      description: "Rehabilitacion funcional, manejo del dolor y mejora de movilidad con plan personalizado.",
-      image: "/logo_transparent.png",
+      name: "Tratamiento de uñas encarnadas",
+      description: "Procedimiento especializado para aliviar el dolor y corregir el crecimiento inadecuado de la uña, evitando infecciones.",
+      image: "/ac3.png",
     },
     {
       id: "srv-2",
-      name: "Terapia ocupacional",
-      description: "Intervencion para promover independencia en actividades diarias y adaptacion del entorno.",
-      image: "/logo_transparent.png",
+      name: "Manejo y cuidado de pie diabético",
+      description: "Atención especializada y preventiva para personas con diabetes, enfocada en evitar lesiones, infecciones y complicaciones mayores.",
+      image: "/ac3.png",
     },
     {
       id: "srv-3",
-      name: "Medicina general y geriatria",
-      description: "Evaluacion, diagnostico y seguimiento clinico continuo en domicilio.",
-      image: "/logo_transparent.png",
+      name: "Eliminación de callosidades",
+      description: "Retiro seguro de piel endurecida que causa molestias o dolor, mejorando la comodidad al caminar.",
+      image: "/ac3.png",
     },
   ];
 
@@ -45,24 +45,13 @@ export default function Seccion2() {
       const mapTituloDetalle = (items) =>
         items.map((item, index) => ({
           id: `titulo-${item.id_publicacionesTituloDescripcion ?? index}`,
-          name: (item.publicacionesTitulo || "").trim() || `Publicacion ${index + 1}`,
+          name: (item.publicacionesTitulo || "").trim() || `Publicación ${index + 1}`,
           description:
             (item.publicacionesDescripcion || "").trim() ||
-            "Atencion personalizada con acompanamiento profesional y seguimiento continuo para resultados sostenibles.",
+            "Atención personalizada con acompañamiento profesional para resultados óptimos.",
           image: item.publicacionesTituloDescripcionImagen
             ? `https://imagedelivery.net/aCBUhLfqUcxA2yhIBn1fNQ/${item.publicacionesTituloDescripcionImagen}/card`
-            : "/logo_transparent.png",
-        }));
-
-      const mapPublicaciones = (items) =>
-        items.map((item, index) => ({
-          id: `publicacion-${item.id_publicaciones ?? index}`,
-          name: (item.descripcionPublicaciones || "").trim() || `Publicacion ${index + 1}`,
-          description:
-            "Atencion personalizada con acompanamiento profesional y seguimiento continuo para resultados sostenibles.",
-          image: item.imagenPublicaciones_primera
-            ? `https://imagedelivery.net/aCBUhLfqUcxA2yhIBn1fNQ/${item.imagenPublicaciones_primera}/full`
-            : "/logo_transparent.png",
+            : "/ac3.png",
         }));
 
       const resTitulo = await fetch(`${API}/publicacionesTituloDetalle/seleccionarPublicacionesTituloDetalle`, {
@@ -82,26 +71,10 @@ export default function Seccion2() {
           return;
         }
       }
-
-      const resPublicaciones = await fetch(`${API}/publicaciones/seleccionarPublicaciones`, {
-        method: "GET",
-        headers: { Accept: "application/json" },
-        mode: "cors",
-      });
-
-      if (!resPublicaciones.ok) {
-        setInfoData([]);
-        return toast.error(`No ha sido posible cargar las imagenes del sistema contacte a soporte de NativeCode`);
-      }
-
-      const dataPublicaciones = await resPublicaciones.json();
-      const activePublicaciones = Array.isArray(dataPublicaciones)
-        ? dataPublicaciones.filter((item) => Number(item.estadoPublicacion ?? 1) === 1)
-        : [];
-      setInfoData(mapPublicaciones(activePublicaciones));
+      setInfoData(fallbackServices);
     } catch {
-      setInfoData([]);
-      return toast.error(`No ha sido posible cargar las imagenes del sistema contacte a soporte de NativeCode`);
+      setInfoData(fallbackServices);
+      toast.error("No ha sido posible cargar los servicios.");
     }
   }
 
@@ -113,15 +86,10 @@ export default function Seccion2() {
 
   useEffect(() => {
     if (!carouselApi) return;
-
-    const onSelect = () => {
-      setCurrentIndex(carouselApi.selectedScrollSnap());
-    };
-
+    const onSelect = () => setCurrentIndex(carouselApi.selectedScrollSnap());
     onSelect();
     carouselApi.on("select", onSelect);
     carouselApi.on("reInit", onSelect);
-
     return () => {
       carouselApi.off("select", onSelect);
       carouselApi.off("reInit", onSelect);
@@ -130,41 +98,29 @@ export default function Seccion2() {
 
   useEffect(() => {
     if (!carouselApi || content.length <= 1) return;
-
     const intervalId = setInterval(() => {
       carouselApi.scrollNext();
-    }, 5200);
-
+    }, 6000);
     return () => clearInterval(intervalId);
   }, [carouselApi, content.length]);
 
   return (
-    <section id="servicios" className="relative scroll-mt-24 bg-transparent py-22 text-[#0f5a52] sm:py-28">
-      <div
-        className="pointer-events-none absolute inset-0"
-        style={{
-          backgroundImage: "url('/fondoblanco.png')",
-          backgroundSize: "contain",
-          backgroundPosition: "center top",
-          backgroundRepeat: "repeat",
-          opacity: 0.45,
-        }}
-      />
+    <section id="servicios" className="relative scroll-mt-24 bg-white py-20 text-[#1A1A1A] sm:py-28 text-center sm:text-left">
 
       <div className="relative mx-auto w-full max-w-7xl px-5 md:px-8 lg:px-10">
         <RevealOnScroll>
-          <div className="grid items-end gap-6 lg:grid-cols-[1fr_auto]">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
             <div>
-              <p className="text-xs uppercase tracking-[0.24em] text-[#1f8f7d]/80">Servicios coordinados</p>
-              <h2 className="mt-4 max-w-4xl text-balance text-4xl font-semibold leading-[1.04] text-[#0f5a52] sm:text-5xl">
-                Atencion interdisciplinaria a domicilio para recuperar y mantener funcionalidad.
+              <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#CC1A2B]">Servicios Podológicos</p>
+              <h2 className="mt-4 max-w-2xl text-4xl font-black leading-tight text-[#1A1A1A] sm:text-5xl">
+                Nuestros Tratamientos
               </h2>
             </div>
             <Link
               href="/servicios"
-              className="inline-flex justify-center rounded-full border border-[#34cdb4] bg-[#34cdb4] px-6 py-3 text-xs font-semibold uppercase tracking-[0.16em] text-white transition hover:bg-[#2ab9a2]"
+              className="inline-flex justify-center rounded-full bg-[#1A1A1A] px-8 py-3 text-xs font-bold uppercase tracking-widest text-white transition hover:bg-[#CC1A2B]"
             >
-              Ver detalle completo
+              Ver todos los servicios
             </Link>
           </div>
         </RevealOnScroll>
@@ -176,36 +132,30 @@ export default function Seccion2() {
               opts={{ align: "start", loop: true }}
               className="w-full"
             >
-              <CarouselContent className="-ml-4">
-                {content.map((service, index) => (
+              <CarouselContent className="-ml-6">
+                {content.map((service) => (
                   <CarouselItem
-                    key={service.id ?? service.name}
-                    className="pl-4 basis-full sm:basis-1/2 lg:basis-1/3"
+                    key={service.id}
+                    className="pl-6 basis-full sm:basis-1/2 lg:basis-1/3"
                   >
                     <Link
-                      href="/reserva-hora"
-                      aria-label={`Agendar para ${service.name}`}
-                      className="group flex h-full flex-col overflow-hidden rounded-3xl border border-[#bfeee3] bg-white shadow-[0_14px_34px_-24px_rgba(15,90,82,0.24)] transition duration-300 ease-out hover:-translate-y-1"
+                      href="/agendaProfesionales"
+                      className="group flex h-full flex-col overflow-hidden rounded-3xl border border-[#E8D5D7] bg-[#FAF5F0] shadow-xl transition-all hover:shadow-2xl hover:border-[#CC1A2B]/40"
                     >
-                      <div className="relative h-[340px] overflow-hidden bg-[#f2fffb] sm:h-[390px] lg:h-[430px]">
+                      <div className="relative h-[320px] overflow-hidden bg-white sm:h-[360px]">
                         <img
-                          src={imageErrors[service.id] ? "/logo_transparent.png" : service.image}
+                          src={imageErrors[service.id] ? "/ac3.png" : service.image}
                           alt={service.name}
-                          className="h-full w-full object-contain transition duration-500 ease-out group-hover:scale-[1.02]"
-                          onError={() =>
-                            setImageErrors((current) => ({
-                              ...current,
-                              [service.id]: true,
-                            }))
-                          }
+                          className="h-full w-full object-contain p-6 transition-transform duration-500 group-hover:scale-105"
+                          onError={() => setImageErrors(prev => ({ ...prev, [service.id]: true }))}
                         />
                       </div>
-                      <div className="p-5">
-                        <h3 className="text-xl font-semibold tracking-[0.01em] text-[#0f5a52]">
+                      <div className="p-8">
+                        <h3 className="text-xl font-bold text-[#1A1A1A]">
                           {service.name}
                         </h3>
-                        <p className="mt-2 text-sm leading-7 tracking-[0.01em] text-[#2b7268]">
-                          {service.description || "Atencion personalizada con acompanamiento profesional y seguimiento continuo para resultados sostenibles."}
+                        <p className="mt-3 text-sm leading-relaxed text-[#6B7280]">
+                          {service.description}
                         </p>
                       </div>
                     </Link>
@@ -213,38 +163,23 @@ export default function Seccion2() {
                 ))}
               </CarouselContent>
 
-              <CarouselPrevious className="left-2 top-1/2 z-20 -translate-y-1/2 border-[#bfeee3] bg-white text-[#1f8f7d] hover:bg-[#ecfbf7] disabled:pointer-events-auto disabled:cursor-not-allowed disabled:opacity-35" />
-              <CarouselNext className="right-2 top-1/2 z-20 -translate-y-1/2 border-[#bfeee3] bg-white text-[#1f8f7d] hover:bg-[#ecfbf7] disabled:pointer-events-auto disabled:cursor-not-allowed disabled:opacity-35" />
+              <CarouselPrevious className="hidden lg:flex -left-6 border-[#E8D5D7] bg-white text-[#CC1A2B] hover:bg-[#FEF2F2]" />
+              <CarouselNext className="hidden lg:flex -right-6 border-[#E8D5D7] bg-white text-[#CC1A2B] hover:bg-[#FEF2F2]" />
             </Carousel>
 
             {content.length > 1 && (
-              <div className="mt-5 flex items-center justify-center gap-2">
-                {content.map((item, index) => (
+              <div className="mt-8 flex items-center justify-center gap-2">
+                {content.map((_, index) => (
                   <button
-                    key={item.id ?? item.name}
-                    type="button"
-                    aria-label={`Ir a publicacion ${index + 1}`}
+                    key={index}
                     onClick={() => carouselApi?.scrollTo(index)}
-                    className={[
-                      "h-2 rounded-full transition-all duration-300",
-                      currentIndex === index ? "w-7 bg-[#34cdb4]" : "w-2 bg-[#8fdfcf] hover:bg-[#73d6c4]",
-                    ].join(" ")}
+                    className={`h-1.5 transition-all duration-300 rounded-full ${currentIndex === index ? "w-8 bg-[#CC1A2B]" : "w-2 bg-[#CC1A2B]/20"}`}
                   />
                 ))}
               </div>
             )}
           </div>
         </RevealOnScroll>
-      </div>
-
-      <div className="hero-wave" aria-hidden="true">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" preserveAspectRatio="none">
-          <path
-            fill="#00cba9"
-            fillOpacity="1"
-            d="M0,320L24,314.7C48,309,96,299,144,293.3C192,288,240,288,288,293.3C336,299,384,309,432,277.3C480,245,528,171,576,154.7C624,139,672,181,720,202.7C768,224,816,224,864,218.7C912,213,960,203,1008,208C1056,213,1104,235,1152,218.7C1200,203,1248,149,1296,160C1344,171,1392,245,1416,282.7L1440,320L1440,320L1416,320C1392,320,1344,320,1296,320C1248,320,1200,320,1152,320C1104,320,1056,320,1008,320C960,320,912,320,864,320C816,320,768,320,720,320C672,320,624,320,576,320C528,320,480,320,432,320C384,320,336,320,288,320C240,320,192,320,144,320C96,320,48,320,24,320L0,320Z"
-          ></path>
-        </svg>
       </div>
     </section>
   );

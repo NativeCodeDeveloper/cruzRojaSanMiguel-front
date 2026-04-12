@@ -46,7 +46,7 @@ function ReservaHoraContent() {
               <p className="mt-2 text-slate-700">
                 Su hora con{" "}
                 <span className="font-semibold text-slate-900">
-                  el equipo profesional de SaludB
+                  Cruz Roja San Miguel · Podología
                 </span>{" "}
                 ha sido reservada con éxito.
               </p>
@@ -112,7 +112,7 @@ function ReservaHoraContent() {
                   </div>
                   <div className="flex-1">
                     <p className="text-sm font-semibold text-slate-900">Ubicación</p>
-                    <p className="text-sm text-slate-600">Atencion a domicilio en Region Metropolitana</p>
+                    <p className="text-sm text-slate-600">Cruz Roja Filial San Miguel</p>
                   </div>
                 </div>
               </div>

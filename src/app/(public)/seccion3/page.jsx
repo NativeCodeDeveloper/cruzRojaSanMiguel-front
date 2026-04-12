@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, ArrowRight } from "lucide-react";
 import RevealOnScroll from "@/Componentes/RevealOnScroll";
 
 const FALLBACK_CASE_IMAGE = "/Pub2.png";
@@ -22,7 +22,6 @@ export default function Seccion3() {
       });
 
       if (!res.ok) {
-        console.error("No se han podido listar publicaciones.");
         setListaPublicaciones([]);
         return [];
       }
@@ -34,7 +33,6 @@ export default function Seccion3() {
       setListaPublicaciones(activePublicaciones);
       return activePublicaciones;
     } catch (err) {
-      console.error("Problema al consultar backend desde la vista frontend:" + err);
       setListaPublicaciones([]);
       return [];
     }
@@ -44,39 +42,22 @@ export default function Seccion3() {
     listarPublicacionesSeccion3();
   }, []);
 
-  const clinicalCases = listaPublicaciones.map((publicaciones, index) => ({
-    id: publicaciones.id_publicaciones ?? `case-${index}`,
-    title: publicaciones.descripcionPublicaciones || `Publicacion ${index + 1}`,
-    image: `https://imagedelivery.net/aCBUhLfqUcxA2yhIBn1fNQ/${publicaciones.imagenPublicaciones_primera}/full`,
+  const clinicalCases = listaPublicaciones.map((pub, index) => ({
+    id: pub.id_publicaciones ?? `case-${index}`,
+    title: pub.descripcionPublicaciones || `Publicación ${index + 1}`,
+    image: `https://imagedelivery.net/aCBUhLfqUcxA2yhIBn1fNQ/${pub.imagenPublicaciones_primera}/full`,
   }));
+  
   const content = clinicalCases.length > 0
     ? clinicalCases
-    : [{ id: "fallback-case", title: "Publicacion en proceso", image: FALLBACK_CASE_IMAGE }];
+    : [{ id: "fallback-case", title: "Publicación en proceso", image: FALLBACK_CASE_IMAGE }];
 
   const scrollByAmount = (direction) => {
     const container = scrollerRef.current;
     if (!container) return;
-
-    const firstCardWidth = container.firstElementChild?.clientWidth ?? 0;
-    const styles = window.getComputedStyle(container);
-    const gap = parseFloat(styles.columnGap || styles.gap || "0");
-    const amount =
-      firstCardWidth > 0 ? Math.round(firstCardWidth + gap) : Math.round(container.clientWidth * 0.82);
-    const maxLeft = Math.max(0, container.scrollWidth - container.clientWidth);
-
+    const amount = 340;
     if (direction === "right") {
-      const nearEnd = container.scrollLeft >= maxLeft - 8;
-      if (nearEnd) {
-        container.scrollTo({ left: 0, behavior: "smooth" });
-      } else {
-        container.scrollBy({ left: amount, behavior: "smooth" });
-      }
-      return;
-    }
-
-    const nearStart = container.scrollLeft <= 8;
-    if (nearStart) {
-      container.scrollTo({ left: maxLeft, behavior: "smooth" });
+      container.scrollBy({ left: amount, behavior: "smooth" });
     } else {
       container.scrollBy({ left: -amount, behavior: "smooth" });
     }
@@ -84,106 +65,90 @@ export default function Seccion3() {
 
   return (
     <>
-      <section id="casos-clinicos" className="scroll-mt-24 bg-transparent py-22 text-[#0f5a52] sm:py-28">
+      {/* ─── Sección Publicaciones (Ordenada y Limpia) ─── */}
+      <section id="casos-clinicos" className="scroll-mt-24 bg-[#FAF5F0] py-20 text-[#1A1A1A] sm:py-28">
         <div className="mx-auto w-full max-w-7xl px-5 md:px-8 lg:px-10">
           <RevealOnScroll>
-            <div className="grid gap-6 lg:grid-cols-[1fr_22rem] lg:items-end">
+            <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
               <div>
-                <p className="text-xs uppercase tracking-[0.24em] text-[#1f8f7d]/78">Modelo SaludB</p>
-                <h2 className="mt-4 max-w-4xl text-balance text-4xl leading-[1] text-[#0f5a52] sm:text-5xl">
-                  Coordinamos cada caso para evitar atenciones fragmentadas.
+                <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#CC1A2B]">Información y Novedades</p>
+                <h2 className="mt-4 max-w-2xl text-4xl font-black text-[#1A1A1A] sm:text-5xl">
+                  Publicaciones Cruz Roja
                 </h2>
+                <p className="mt-4 text-[#6B7280]">Cuidado podológico con estándares de higiene y seguridad clínica.</p>
               </div>
-              <div className="rounded-3xl border border-[#00b89a] bg-[linear-gradient(180deg,#00cba9_0%,#00b89a_100%)] p-5 shadow-[0_16px_36px_-22px_rgba(0,122,103,0.34)]">
-                <p className="text-[11px] uppercase tracking-[0.22em] text-white/86">Atencion en red</p>
-                <p className="mt-2 text-sm leading-7 text-white/94">
-                  Integramos profesionales, objetivos clinicos y comunicacion con la familia en una sola ruta de cuidado.
-                </p>
+              <div className="flex gap-2">
+                <button
+                  onClick={() => scrollByAmount("left")}
+                  className="flex h-12 w-12 items-center justify-center rounded-full border border-[#E8D5D7] bg-white text-[#CC1A2B] transition hover:bg-[#FEF2F2]"
+                >
+                  <ChevronLeft className="h-6 w-6" />
+                </button>
+                <button
+                  onClick={() => scrollByAmount("right")}
+                  className="flex h-12 w-12 items-center justify-center rounded-full border border-[#E8D5D7] bg-white text-[#CC1A2B] transition hover:bg-[#FEF2F2]"
+                >
+                  <ChevronRight className="h-6 w-6" />
+                </button>
               </div>
             </div>
           </RevealOnScroll>
 
-          <div className="mt-8 flex items-center justify-end gap-2">
-            <button
-              type="button"
-              onClick={() => scrollByAmount("left")}
-              aria-label="Desplazar resultados hacia la izquierda"
-              className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-[#00b89a] bg-[#00cba9] text-white transition duration-300 hover:bg-[#00b89a]"
-            >
-              <ChevronLeft className="h-4 w-4" />
-            </button>
-            <button
-              type="button"
-              onClick={() => scrollByAmount("right")}
-              aria-label="Desplazar resultados hacia la derecha"
-              className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-[#00b89a] bg-[#00cba9] text-white transition duration-300 hover:bg-[#00b89a]"
-            >
-              <ChevronRight className="h-4 w-4" />
-            </button>
-          </div>
-
-          <div ref={scrollerRef} className="hide-scrollbar mt-6 flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth pb-2">
-            {content.map((item, index) => (
-              <RevealOnScroll
-                key={item.id}
-                className="w-[74%] shrink-0 snap-start sm:w-[52%] lg:w-[32%]"
-                delayClass={index === 0 ? "delay-100" : "delay-150"}
+          <div 
+            ref={scrollerRef} 
+            className="hide-scrollbar flex gap-6 overflow-x-auto snap-x snap-mandatory scroll-smooth pb-8"
+          >
+            {content.map((item) => (
+              <article 
+                key={item.id} 
+                className="w-[85%] shrink-0 snap-start sm:w-[45%] lg:w-[30%] rounded-[2.5rem] border border-[#E8D5D7] bg-white shadow-xl overflow-hidden"
               >
-                <article className="flex h-full flex-col overflow-hidden rounded-3xl border border-[#bfeee3] bg-white shadow-[0_16px_36px_-22px_rgba(15,90,82,0.2)]">
-                  <div className="relative aspect-[2/3] overflow-hidden bg-[#f3fffc]">
-                    <img
-                      src={imageErrors[item.image] ? FALLBACK_CASE_IMAGE : item.image}
-                      alt={item.title}
-                      loading="lazy"
-                      className="h-full w-full object-contain object-center"
-                      onError={() =>
-                        setImageErrors((current) => ({
-                          ...current,
-                          [item.image]: true,
-                        }))
-                      }
-                    />
-                  </div>
-                  <div className="flex justify-center p-6">
-                    <h3 className="text-center text-xl font-semibold leading-7 tracking-[0.01em] text-[#0f5a52]">
-                      {item.title}
-                    </h3>
-                  </div>
-                </article>
-              </RevealOnScroll>
+                <div className="relative aspect-[3/4] overflow-hidden bg-white">
+                  <img
+                    src={imageErrors[item.image] ? FALLBACK_CASE_IMAGE : item.image}
+                    alt={item.title}
+                    className="h-full w-full object-contain p-4"
+                    onError={() => setImageErrors(prev => ({ ...prev, [item.image]: true }))}
+                  />
+                </div>
+                <div className="p-8 text-center border-t border-[#FAF5F0]">
+                  <h3 className="text-lg font-bold text-[#1A1A1A] leading-tight">
+                    {item.title}
+                  </h3>
+                </div>
+              </article>
             ))}
           </div>
         </div>
       </section>
 
-      <section id="agenda" className="scroll-mt-24 bg-transparent py-20 text-white sm:py-24">
-        <div className="mx-auto w-full max-w-7xl px-5 md:px-8 lg:px-10">
+      {/* ─── CTA Final Ordenado ─── */}
+      <section id="agenda" className="py-12 px-5 bg-white">
+        <div className="mx-auto max-w-5xl">
           <RevealOnScroll>
-            <div
-              className="relative overflow-hidden rounded-[2rem] border border-white/28 px-6 py-14 text-center shadow-[0_18px_40px_-45px_rgba(7,62,55,0.45)] sm:px-10"
-              style={{
-                backgroundImage: "url('/fondoverde.png')",
-                backgroundSize: "cover",
-                backgroundPosition: "center",
-                backgroundRepeat: "no-repeat",
-              }}
-            >
-              <div className="relative">
-                <p className="text-xs uppercase tracking-[0.24em] text-white/86">Agenda SaludB</p>
-                <h2 className="mx-auto mt-4 max-w-3xl text-balance text-4xl leading-[1] text-white sm:text-5xl">
-                  Agenda una primera evaluacion para coordinar tu plan domiciliario.
+            <div className="rounded-[3rem] border-2 border-[#CC1A2B]/20 bg-white p-10 md:p-16 text-center text-[#1A1A1A] relative overflow-hidden shadow-xl">
+              <div className="relative z-10 flex flex-col items-center">
+                <p className="text-[10px] font-bold uppercase tracking-[0.4em] text-[#CC1A2B] mb-6">Agenda tu Atención</p>
+                <h2 className="text-editorial-title text-3xl font-black sm:text-5xl leading-tight max-w-3xl">
+                  Reserva tu hora hoy mismo con nuestras profesionales.
                 </h2>
-                <p className="mx-auto mt-5 max-w-2xl text-sm leading-8 tracking-[0.02em] text-white/90 sm:text-base">
-                  Revisamos tu caso, definimos prioridades y te orientamos con un equipo interdisciplinario segun tus necesidades.
-                </p>
-                <Link
-                  href="/agendaProfesionales"
-                  aria-label="Reservar hora"
-                  className="mt-8 inline-flex w-full max-w-xs justify-center rounded-full border border-white/35 bg-white px-8 py-3 text-xs font-semibold uppercase tracking-[0.16em] text-[#0f5a52] transition duration-300 ease-out hover:bg-white/90"
-                >
-                  Agendar primera evaluacion
-                </Link>
+                <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4 w-full sm:w-auto">
+                  <Link
+                    href="/agendaProfesionales"
+                    className="inline-flex w-full sm:w-auto items-center justify-center rounded-full bg-[#CC1A2B] px-12 py-5 text-[11px] font-black uppercase tracking-widest text-white transition-all hover:bg-[#9E1020] hover:shadow-2xl hover:scale-105"
+                  >
+                    Agendar Hora
+                  </Link>
+                  <Link
+                    href="/contacto"
+                    className="inline-flex w-full sm:w-auto items-center justify-center rounded-full border border-[#E8D5D7] bg-white px-12 py-5 text-[11px] font-black uppercase tracking-widest text-[#1A1A1A] transition-all hover:bg-[#FAF5F0] hover:border-[#CC1A2B]/20"
+                  >
+                    Ver Contacto
+                  </Link>
+                </div>
               </div>
+              {/* Sutil decorado clínico */}
+              <div className="absolute -bottom-20 -right-20 h-64 w-64 rounded-full bg-[#CC1A2B]/5 blur-3xl pointer-events-none" />
             </div>
           </RevealOnScroll>
         </div>

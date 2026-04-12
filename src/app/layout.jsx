@@ -1,7 +1,7 @@
 import "./globals.css";
 import { AnimatedLayout } from "@/Componentes/AnimatedLayout";
 import AgendaProvider from "@/ContextosGlobales/AgendaContext";
-import { Inter, Plus_Jakarta_Sans } from "next/font/google";
+import { Inter, Outfit, Lora } from "next/font/google";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -9,10 +9,17 @@ const inter = Inter({
   weight: ["400", "500", "600", "700", "800"],
 });
 
-const plusJakarta = Plus_Jakarta_Sans({
+const outfit = Outfit({
   subsets: ["latin"],
-  variable: "--font-plus-jakarta",
-  weight: ["500", "600", "700", "800"],
+  variable: "--font-outfit",
+  weight: ["400", "500", "600", "700", "800", "900"],
+});
+
+const lora = Lora({
+  subsets: ["latin"],
+  variable: "--font-lora",
+  weight: ["400", "500", "600", "700"],
+  style: ["normal", "italic"],
 });
 
 export const metadataBase = new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://www.saludb.cl");
@@ -71,7 +78,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="es" className={`${inter.variable} ${plusJakarta.variable}`}>
+    <html lang="es" className={`${inter.variable} ${outfit.variable} ${lora.variable}`}>
       <body className="min-h-screen bg-white">
         <AnimatedLayout>
           <AgendaProvider>{children}</AgendaProvider>

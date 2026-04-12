@@ -2,33 +2,29 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
-import { ChevronLeft, ChevronRight } from "lucide-react";
-import toast from "react-hot-toast";
+import { ArrowRight } from "lucide-react";
 
 const fallbackSlides = [
   {
     id: "fallback-1",
-    image: "/fondoverde.png",
-    alt: "SaludB atencion domiciliaria",
-    badge: "SaludB",
-    title: "Atencion integral a domicilio con coordinacion clinica real.",
-    text: "Acompanamos a pacientes y familias con un equipo interdisciplinario que trabaja de forma coordinada y personalizada.",
+    image: "/ac3.png",
+    alt: "Podología Cruz Roja San Miguel",
+    title: "Excelencia Podológica: El Legado de Cruz Roja San Miguel.",
+    text: "Atención especializada bajo estándares clínicos internacionales. Paula Arce y Miriam Ponce cuidan la salud de tus pies con profesionalismo y elegancia.",
   },
   {
     id: "fallback-2",
-    image: "/logo_transparent.png",
-    alt: "Atencion domiciliaria SaludB",
-    badge: "Region Metropolitana",
-    title: "Reducimos barreras de acceso para mejorar calidad de vida.",
-    text: "Llevamos atencion de salud al hogar para evitar traslados innecesarios y favorecer la continuidad del cuidado.",
+    image: "/Imagen 1.jpg",
+    alt: "Atención podológica San Miguel",
+    title: "Cuidando tu bienestar a través de la Prevención.",
+    text: "Especialistas en la salud integral del pie, enfocadas en ofrecer un servicio ético y humano en el corazón de San Miguel.",
   },
 ];
 
-export default function Portada() {
+export default function PortadaEditorialClinical() {
   const [dataPortada, setDataPortada] = useState([]);
   const [imageErrors, setImageErrors] = useState({});
   const [activeIndex, setActiveIndex] = useState(0);
-  const touchStartX = useRef(null);
   const API = process.env.NEXT_PUBLIC_API_URL || "https://bartelsmansalud.nativecode.cl";
 
   async function cargarPortada() {
@@ -38,17 +34,14 @@ export default function Portada() {
         headers: { Accept: "application/json" },
         mode: "cors",
       });
-
       if (!res.ok) {
         setDataPortada([]);
         return;
       }
-
       const data = await res.json();
       setDataPortada(Array.isArray(data) ? data : []);
     } catch {
       setDataPortada([]);
-      toast.error("No se ha podido cargar portada, contacte al administrador del sistema.");
     }
   }
 
@@ -62,11 +55,10 @@ export default function Portada() {
       id: `portada-${item.id_publicacionesPortada ?? index}`,
       image: item.imagenPortada
         ? `https://imagedelivery.net/aCBUhLfqUcxA2yhIBn1fNQ/${item.imagenPortada}/portada`
-        : "/fondoverde.png",
-      alt: item.tituloPortadaCarrusel || "Portada SaludB",
-      badge: "SaludB",
-      title: item.tituloPortadaCarrusel || "Salud integral a domicilio",
-      text: item.descripcionPublicacionesPortada || "Atencion personalizada para pacientes y familias en la Region Metropolitana.",
+        : "/ac3.png",
+      alt: item.tituloPortadaCarrusel || "Podología Cruz Roja San Miguel",
+      title: item.tituloPortadaCarrusel || "Excelencia en Salud Podológica.",
+      text: item.descripcionPublicacionesPortada || "Atención especializada respaldada por la Cruz Roja.",
     }));
 
   const safeSlides = useMemo(
@@ -76,171 +68,97 @@ export default function Portada() {
 
   useEffect(() => {
     if (safeSlides.length <= 1) return undefined;
-
     const intervalId = setInterval(() => {
       setActiveIndex((current) => (current + 1) % safeSlides.length);
-    }, 5200);
-
+    }, 7000);
     return () => clearInterval(intervalId);
   }, [safeSlides.length]);
 
-  const goPrev = () => {
-    setActiveIndex((current) => (current - 1 + safeSlides.length) % safeSlides.length);
-  };
-
-  const goNext = () => {
-    setActiveIndex((current) => (current + 1) % safeSlides.length);
-  };
-
-  const handleTouchStart = (event) => {
-    touchStartX.current = event.touches[0]?.clientX ?? null;
-  };
-
-  const handleTouchEnd = (event) => {
-    if (touchStartX.current == null) return;
-
-    const endX = event.changedTouches[0]?.clientX ?? touchStartX.current;
-    const distance = endX - touchStartX.current;
-
-    if (Math.abs(distance) > 45) {
-      if (distance > 0) {
-        goPrev();
-      } else {
-        goNext();
-      }
-    }
-
-    touchStartX.current = null;
-  };
+  const currentSlide = safeSlides[activeIndex];
 
   return (
-    <section id="inicio" className="relative -mt-20 min-h-[100svh] scroll-mt-24 overflow-hidden md:-mt-24">
-      <div
-        className="absolute inset-0"
-        style={{
-          backgroundImage: "url('/fondoverde.png')",
-          backgroundSize: "cover",
-          backgroundPosition: "center center",
-          backgroundRepeat: "no-repeat",
-        }}
-      />
-      <div className="mx-auto flex min-h-[100svh] w-full max-w-none items-start px-2 pt-28 pb-4 sm:pt-32 sm:pb-8 md:px-8 lg:px-10">
-        <div className="relative w-full overflow-hidden rounded-[2rem] border border-white/16 bg-transparent shadow-[0_34px_90px_-56px_rgba(0,0,0,0.62)]">
-          <div
-            className="relative min-h-[74svh] sm:min-h-[80svh]"
-            onTouchStart={handleTouchStart}
-            onTouchEnd={handleTouchEnd}
-          >
-            {safeSlides.map((slide, index) => {
-              const isActive = index === activeIndex;
+    <section id="inicio" className="relative -mt-24 bg-[#FAF5F0] min-h-[92svh] flex items-center overflow-hidden">
 
-              return (
-                <article
-                  key={slide.id}
-                  className={[
-                    "absolute inset-0 transition-opacity duration-700 ease-out",
-                    isActive ? "opacity-100" : "pointer-events-none opacity-0",
-                  ].join(" ")}
-                >
-                  <img
-                    src={imageErrors[slide.id] ? "/fondoverde.png" : slide.image}
-                    alt={slide.alt}
-                    className="absolute inset-0 h-full w-full object-cover object-center"
-                    onError={() =>
-                      setImageErrors((current) => ({
-                        ...current,
-                        [slide.id]: true,
-                      }))
-                    }
-                  />
-                  <div className="absolute inset-x-0 bottom-0 top-0 flex items-end px-6 pb-10 pt-20 sm:px-10 sm:pb-12 md:px-14">
-                    <div className="max-w-2xl">
-                      <img
-                        src="/logo_clean.png"
-                        alt="SaludB"
-                        width={120}
-                        height={120}
-                        className="h-20 w-auto object-contain opacity-95 sm:h-18"
-                      />
-                      <h1 className="mt-4 text-balance text-3xl font-medium leading-tight tracking-[0.01em] text-white sm:text-4xl lg:text-5xl">
-                        Salud integral a domicilio
-                      </h1>
-                      <h2 className="mt-4 text-balance text-xl font-medium leading-tight tracking-[0.01em] text-white/95 sm:text-2xl lg:text-3xl">
-                        {slide.title}
-                      </h2>
-                      <p className="mt-5 max-w-xl text-xs leading-7 tracking-[0.01em] text-white/88 sm:text-sm">
-                        {slide.text}
-                      </p>
+      {/* Organic Shape Background (Clinical Tint) */}
+      <div className="absolute top-1/2 right-[5%] -translate-y-1/2 w-[45vw] aspect-square organic-shape bg-[#CC1A2B]/5 blur-3xl opacity-40 pointer-events-none" />
 
-                      <div className="mt-8 mb-3.5 flex flex-col gap-3 sm:flex-row sm:items-center">
-                        <Link
-                          href="/agendaProfesionales"
-                          aria-label="Agendar evaluacion"
-                          className="inline-flex w-full justify-center rounded-full border border-white/22 bg-white px-7 py-3 text-xs font-semibold uppercase tracking-[0.16em] text-[#0f5a52] transition duration-300 ease-out hover:bg-white/90 sm:w-auto"
-                        >
-                          Agendar evaluacion
-                        </Link>
-                        <Link
-                          href="/#servicios"
-                          aria-label="Ir a servicios"
-                          className="inline-flex w-full justify-center rounded-full border border-white/35 bg-white/12 px-7 py-3 text-xs font-semibold uppercase tracking-[0.16em] text-white transition duration-300 ease-out hover:bg-white/22 sm:w-auto"
-                        >
-                          Conoce servicios
-                        </Link>
-                      </div>
-                    </div>
-                  </div>
-                </article>
-              );
-            })}
+      <div className="mx-auto w-full max-w-7xl px-5 pt-32 pb-20 md:px-8 lg:px-10 relative z-10">
+        <div className="flex flex-col lg:flex-row lg:items-center lg:gap-20">
 
-            <div className="absolute inset-x-0 bottom-5 z-20 flex items-center justify-between px-4 sm:px-6">
-              <div className="flex items-center gap-2">
-                {safeSlides.map((slide, index) => (
-                  <button
-                    key={slide.id}
-                    type="button"
-                    aria-label={`Mostrar slide ${index + 1}`}
-                    onClick={() => setActiveIndex(index)}
-                    className={[
-                      "h-2.5 rounded-full transition-all duration-300",
-                      activeIndex === index ? "w-8 bg-[#34cdb4]" : "w-2.5 bg-white/45 hover:bg-white/70",
-                    ].join(" ")}
-                  />
-                ))}
+          {/* — Text Content (Editorial Clinical) — */}
+          <div className="w-full lg:w-1/2">
+            <div className="animate-reveal-up">
+
+
+              <h1 className="text-editorial-title text-5xl sm:text-7xl lg:text-8xl text-[#1A1A1A] max-w-xl">
+                {currentSlide?.title}
+              </h1>
+
+              <div className="mt-10 max-w-lg">
+                <p className="text-xl leading-relaxed text-[#6B7280]">
+                  {currentSlide?.text}
+                </p>
               </div>
 
-              <div className="flex items-center gap-2">
-                <button
-                  type="button"
-                  aria-label="Slide anterior"
-                  onClick={goPrev}
-                  className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/30 bg-black/35 text-white transition duration-300 hover:bg-black/55"
+              <div className="mt-12 flex flex-wrap gap-8 items-center">
+                <Link
+                  href="/agendaProfesionales"
+                  className="inline-flex h-16 items-center justify-center rounded-full bg-[#CC1A2B] px-14 text-sm font-bold uppercase tracking-widest text-white transition-all hover:bg-[#9E1020] hover:shadow-2xl hover:scale-105"
                 >
-                  <ChevronLeft className="h-4 w-4" />
-                </button>
-                <button
-                  type="button"
-                  aria-label="Siguiente slide"
-                  onClick={goNext}
-                  className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/30 bg-black/35 text-white transition duration-300 hover:bg-black/55"
+                  Agendar Atención
+                </Link>
+                <Link
+                  href="/#servicios"
+                  className="font-bold text-sm uppercase tracking-widest text-[#1A1A1A] border-b-2 border-transparent hover:border-[#CC1A2B] transition-all pb-1"
                 >
-                  <ChevronRight className="h-4 w-4" />
-                </button>
+                  Ver Servicios
+                </Link>
               </div>
+
+              {/* Dot Navigation */}
+              {safeSlides.length > 1 && (
+                <div className="mt-20 flex gap-2">
+                  {safeSlides.map((_, i) => (
+                    <button
+                      key={i}
+                      onClick={() => setActiveIndex(i)}
+                      className={`h-1.5 transition-all duration-500 rounded-full ${activeIndex === i ? 'w-10 bg-[#CC1A2B]' : 'w-2 bg-[#CC1A2B]/15'}`}
+                    />
+                  ))}
+                </div>
+              )}
             </div>
           </div>
-        </div>
-      </div>
 
-      <div className="hero-wave" aria-hidden="true">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" preserveAspectRatio="none">
-          <path
-            fill="#ffffff"
-            fillOpacity="1"
-            d="M0,320L24,314.7C48,309,96,299,144,293.3C192,288,240,288,288,293.3C336,299,384,309,432,277.3C480,245,528,171,576,154.7C624,139,672,181,720,202.7C768,224,816,224,864,218.7C912,213,960,203,1008,208C1056,213,1104,235,1152,218.7C1200,203,1248,149,1296,160C1344,171,1392,245,1416,282.7L1440,320L1440,320L1416,320C1392,320,1344,320,1296,320C1248,320,1200,320,1152,320C1104,320,1056,320,1008,320C960,320,912,320,864,320C816,320,768,320,720,320C672,320,624,320,576,320C528,320,480,320,432,320C384,320,336,320,288,320C240,320,192,320,144,320C96,320,48,320,24,320L0,320Z"
-          ></path>
-        </svg>
+          {/* — Image Container (Editorial Clinical) — */}
+          <div className="relative mt-20 w-full lg:mt-0 lg:flex-1">
+            <div className="animate-reveal-up-delay relative">
+
+              {/* Soft Organic Blob behind image */}
+              <div className="absolute -inset-10 -z-10 organic-shape bg-[#FAF5F0] border border-[#CC1A2B]/10 opacity-60" />
+
+              <div className="relative overflow-hidden rounded-[3.5rem] shadow-[0_40px_100px_-30px_rgba(204,26,43,0.1)] bg-white p-3">
+                <div className="relative overflow-hidden rounded-[2.8rem]">
+                  {safeSlides.map((slide, index) => (
+                    <div
+                      key={slide.id}
+                      className={`transition-all duration-1000 ease-in-out ${index === activeIndex ? 'opacity-100 scale-100' : 'absolute inset-0 opacity-0 scale-110'}`}
+                    >
+                      <img
+                        src={imageErrors[slide.id] ? "/ac3.png" : slide.image}
+                        alt={slide.alt}
+                        className="aspect-[4/5] w-full object-cover sm:aspect-[3/4] lg:h-[75svh]"
+                        onError={() => setImageErrors(prev => ({ ...prev, [slide.id]: true }))}
+                      />
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
       </div>
     </section>
   );
