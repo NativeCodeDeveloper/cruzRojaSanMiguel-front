@@ -15,7 +15,6 @@ const navItems = [
 
 export default function Navbar() {
   const pathname = usePathname();
-  const isHome = pathname === "/";
   const [isOpen, setIsOpen] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
 
@@ -56,8 +55,9 @@ export default function Navbar() {
   const shadowAlpha = scrollProgress * 0.12;
   const blurPx = scrollProgress * 24;
   const borderWidth = scrollProgress > 0.02 ? 1 : 0;
-  const navTextColor = "#1A1A1A";
-  const mobileButtonTextColor = "#CC1A2B";
+  const navTextColor = "#7D2430";
+  const navMutedColor = "#6D5B60";
+  const mobileButtonTextColor = "#9E1020";
   const mobileButtonBg = "#ffffff";
   const mobileButtonBorder = "#FCCDD1";
 
@@ -93,8 +93,14 @@ export default function Navbar() {
               <li key={item.label}>
                 <Link
                   href={item.href}
-                  className="text-[14px] font-black uppercase tracking-[0.3em] transition-all duration-300 hover:text-[#CC1A2B] hover:scale-105 inline-block"
-                  style={{ color: navTextColor }}
+                  className="inline-flex items-center rounded-full px-4 py-2 text-[13px] font-semibold uppercase tracking-[0.16em] transition-all duration-300 hover:bg-white/80 hover:text-[#9E1020]"
+                  style={{
+                    color: item.href === "/contacto" && pathname === "/contacto" ? "#9E1020" : navTextColor,
+                    backgroundColor:
+                      item.href === "/contacto" && pathname === "/contacto"
+                        ? "rgba(255,255,255,0.84)"
+                        : "transparent",
+                  }}
                 >
                   {item.label}
                 </Link>
@@ -107,7 +113,7 @@ export default function Navbar() {
           <Link
             href="/agendaProfesionales"
             aria-label="Agendar hora"
-            className="hidden rounded-full border-2 border-[#CC1A2B] bg-[#CC1A2B] px-10 py-4 text-[13px] font-black uppercase tracking-[0.2em] text-white transition-all duration-300 ease-out hover:bg-transparent hover:text-[#CC1A2B] sm:inline-flex"
+            className="hidden rounded-full border border-[#B01824] bg-[#B01824] px-8 py-3 text-[12px] font-bold uppercase tracking-[0.14em] text-white transition-all duration-300 ease-out hover:bg-[#8F101E] sm:inline-flex"
           >
             Agendar hora
           </Link>
@@ -131,7 +137,7 @@ export default function Navbar() {
 
       <div
         className={[
-          "overflow-hidden border-t border-[#FCCDD1] bg-[#FEF2F2] backdrop-blur-xl lg:hidden",
+          "overflow-hidden border-t border-[#FCCDD1] bg-[#fff9f8] backdrop-blur-xl lg:hidden",
           isOpen ? "max-h-[420px] opacity-100" : "max-h-0 opacity-0",
           "transition-all duration-300 ease-out",
         ].join(" ")}
@@ -142,7 +148,10 @@ export default function Navbar() {
               key={item.label}
               href={item.href}
               onClick={() => setIsOpen(false)}
-              className="rounded-lg border border-transparent px-4 py-3 text-[11px] font-medium uppercase tracking-[0.16em] text-[#CC1A2B] transition duration-300 hover:border-[#FCCDD1] hover:bg-[#FEF2F2] sm:text-xs"
+              className="rounded-xl border border-transparent px-4 py-3 text-[11px] font-semibold uppercase tracking-[0.14em] transition duration-300 hover:border-[#FCCDD1] hover:bg-white sm:text-xs"
+              style={{
+                color: item.href === "/contacto" && pathname === "/contacto" ? mobileButtonTextColor : navMutedColor,
+              }}
             >
               {item.label}
             </Link>
@@ -151,7 +160,7 @@ export default function Navbar() {
             href="/agendaProfesionales"
             onClick={() => setIsOpen(false)}
             aria-label="Agendar hora desde menu movil"
-            className="mt-2 rounded-lg border border-[#CC1A2B] bg-[#CC1A2B] px-4 py-3 text-center text-[11px] font-semibold uppercase tracking-[0.16em] text-white transition duration-300 hover:bg-[#9E1020] sm:text-xs"
+            className="mt-2 rounded-xl border border-[#B01824] bg-[#B01824] px-4 py-3 text-center text-[11px] font-semibold uppercase tracking-[0.14em] text-white transition duration-300 hover:bg-[#8F101E] sm:text-xs"
           >
             Agendar hora
           </Link>

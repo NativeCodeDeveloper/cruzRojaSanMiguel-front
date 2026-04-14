@@ -86,10 +86,10 @@ export default function CarruselProducto({ imagenes, imagen1, imagen2, imagen3, 
     const thumbs = imagenesOk;
 
     return (
-        <div className="flex flex-col items-center w-full gap-2 md:gap-4 mt-0 md:mt-4">
+        <div className="mt-0 flex w-full flex-col items-center gap-3 md:mt-4 md:gap-4">
             {/* Miniaturas: solo visibles en desktop/tablet, ocultas en mobile */}
             {thumbs.length > 1 && (
-                <div className="hidden md:flex gap-3 mb-2 justify-center w-full overflow-x-auto py-2 bg-white rounded-xl">
+                <div className="hidden w-full justify-center gap-3 overflow-x-auto rounded-xl border border-[#E4D9DA] bg-white py-2 md:flex">
                     {thumbs.map((img, i) => {
                         const isActive = i === actual;
                         return (
@@ -98,10 +98,10 @@ export default function CarruselProducto({ imagenes, imagen1, imagen2, imagen3, 
                                 type="button"
                                 onClick={() => setActual(i)}
                                 className={
-                                    "shrink-0 rounded-xl p-1 bg-white transition flex items-center justify-center " +
+                                    "shrink-0 rounded-xl bg-white p-1 transition flex items-center justify-center " +
                                     (isActive
-                                        ? "ring-2 ring-black"
-                                        : "ring-1 ring-black/10 hover:ring-black/30")
+                                        ? "ring-2 ring-[#CC1A2B]"
+                                        : "ring-1 ring-[#CC1A2B]/18 hover:ring-[#CC1A2B]/45")
                                 }
                                 aria-label={`Ver imagen ${i + 1}`}
                             >
@@ -129,7 +129,7 @@ export default function CarruselProducto({ imagenes, imagen1, imagen2, imagen3, 
 
             {/* Imagen principal */}
             <div className="relative w-full max-w-full sm:max-w-xl">
-                <div className="relative aspect-square md:aspect-[4/3] w-full overflow-hidden rounded-2xl bg-white">
+                <div className="relative aspect-square w-full overflow-hidden rounded-[1.4rem] border border-[#E4D9DA] bg-[#FBF8F4] md:aspect-[4/3]">
                     <img
                         src={imagenesOk[actual]}
                         alt={`Imagen principal ${actual + 1}`}
@@ -145,7 +145,7 @@ export default function CarruselProducto({ imagenes, imagen1, imagen2, imagen3, 
                         }}
                     />
                     {/* Indicador */}
-                    <div className="absolute bottom-3 left-1/2 -translate-x-1/2 rounded-full bg-black/70 px-3 py-1 text-xs text-white">
+                    <div className="absolute bottom-4 left-1/2 -translate-x-1/2 rounded-full border border-white/40 bg-[#1A1A1A]/75 px-3 py-1 text-[11px] text-white">
                         {actual + 1} / {imagenesOk.length}
                     </div>
                 </div>
@@ -155,7 +155,7 @@ export default function CarruselProducto({ imagenes, imagen1, imagen2, imagen3, 
                         <button
                             type="button"
                             onClick={anterior}
-                            className="rounded-full bg-white/90 p-3 shadow hover:bg-white border border-slate-200"
+                            className="rounded-full border border-[#CC1A2B]/25 bg-white p-3 text-[#B01824] shadow-sm transition hover:bg-[#FEF2F2]"
                             aria-label="Imagen anterior"
                         >
                             <span className="text-2xl leading-none">‹</span>
@@ -163,7 +163,7 @@ export default function CarruselProducto({ imagenes, imagen1, imagen2, imagen3, 
                         <button
                             type="button"
                             onClick={siguiente}
-                            className="rounded-full bg-white/90 p-3 shadow hover:bg-white border border-slate-200"
+                            className="rounded-full border border-[#CC1A2B]/25 bg-white p-3 text-[#B01824] shadow-sm transition hover:bg-[#FEF2F2]"
                             aria-label="Imagen siguiente"
                         >
                             <span className="text-2xl leading-none">›</span>

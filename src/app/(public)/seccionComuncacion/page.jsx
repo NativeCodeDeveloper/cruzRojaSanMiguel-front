@@ -41,21 +41,21 @@ export default function SeccionComuncacion() {
     )
 
     return (
-        <main className="bg-transparent text-[#fff4ee]">
+        <main className="bg-[#FAF5F0] text-[#1A1A1A]">
             <section className="mx-auto w-full max-w-7xl px-6 pb-16 pt-24 md:px-10 md:pt-28">
-                <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[#f1d8cb]/72">
+                <p className="eyebrow text-[#B01824]">
                     Comunidad SaludB
                 </p>
-                <h1 className="mt-5 max-w-4xl text-4xl leading-tight text-[#fff1e9] sm:text-5xl">
-                    Contenidos y orientacion para el cuidado domiciliario integral.
+                <h1 className="mt-5 max-w-4xl text-editorial-title text-[#1A1A1A]">
+                    Contenidos y orientacion para el cuidado integral.
                 </h1>
-                <p className="mt-6 max-w-3xl text-sm leading-relaxed text-[#f5dfd4]/82 sm:text-base">
+                <p className="mt-6 max-w-3xl text-sm leading-relaxed text-[#5F6772] sm:text-base">
                     Compartimos recomendaciones practicas para pacientes, familias y cuidadores en procesos de rehabilitacion y acompanamiento.
                 </p>
             </section>
 
             <section className="mx-auto w-full max-w-7xl px-6 pb-20 md:px-10 md:pb-24">
-                <div className="rounded-[2rem] border border-[#f2d4c7]/14 bg-[linear-gradient(160deg,rgba(64,38,33,0.58)_0%,rgba(24,14,12,0.9)_100%)] p-4 sm:p-6">
+                <div className="section-shell rounded-[2rem] p-4 sm:p-6">
                     <CarruselOfertas
                         title=""
                         images={carrusel}
@@ -65,7 +65,7 @@ export default function SeccionComuncacion() {
                     <div className="-mt-8 flex justify-center pb-4 sm:pb-6">
                         <Link
                             href="/catalogo"
-                            className="rounded-full border border-[#bfeee3]/45 bg-[linear-gradient(135deg,#d8f6ef_0%,#34cdb4_100%)] px-8 py-3 text-sm font-semibold uppercase tracking-[0.16em] text-[#0f5a52] transition hover:brightness-105"
+                            className="rounded-full bg-[#B01824] px-8 py-3 text-[11px] font-semibold uppercase tracking-[0.16em] text-white transition hover:bg-[#8F101E]"
                         >
                             Ver soluciones
                         </Link>

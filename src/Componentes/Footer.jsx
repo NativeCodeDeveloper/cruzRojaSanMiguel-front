@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight, Mail, MapPin, MessageCircle } from "lucide-react";
+import { MapPin, MessageCircle } from "lucide-react";
 
 const footerLinks = [
   { label: "Inicio", href: "/#inicio" },
@@ -34,17 +34,17 @@ export default function FooterLimpio() {
                 className="h-16 w-auto object-contain object-left mb-6"
               />
             </Link>
-            <h2 className="text-3xl font-black leading-tight tracking-tight text-[#1A1A1A]">
+            <h2 className="text-2xl font-black leading-tight tracking-tight text-[#1A1A1A] sm:text-[2rem]">
               Cuidado Profesional <br /><span className="text-[#CC1A2B]">Cruz Roja San Miguel</span>
             </h2>
-            <p className="mt-5 max-w-md text-sm leading-relaxed text-[#6B7280]">
+            <p className="mt-5 max-w-md text-sm leading-relaxed text-[#6B7280] sm:text-[15px]">
               Atención podológica especializada con los más altos estándares de higiene y seguridad clínica.
             </p>
 
             <div className="mt-8">
               <Link
                 href="/agendaProfesionales"
-                className="inline-flex items-center justify-center rounded-full bg-[#1A1A1A] px-8 py-3 text-xs font-bold uppercase tracking-widest text-white transition hover:bg-[#CC1A2B]"
+                className="inline-flex items-center justify-center rounded-full bg-[#1A1A1A] px-8 py-3 text-[11px] font-bold uppercase tracking-[0.14em] text-white transition hover:bg-[#CC1A2B]"
               >
                 Agendar ahora
               </Link>
@@ -53,11 +53,11 @@ export default function FooterLimpio() {
 
           {/* — Enlaces rápidos — */}
           <div className="lg:col-span-2">
-            <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#CC1A2B] mb-6">Navegación</p>
+            <p className="mb-6 text-[11px] font-bold uppercase tracking-[0.22em] text-[#CC1A2B]">Navegacion</p>
             <ul className="space-y-3">
               {footerLinks.map((link) => (
                 <li key={link.label}>
-                  <Link href={link.href} className="text-sm font-medium text-[#6B7280] transition hover:text-[#CC1A2B]">
+                  <Link href={link.href} className="text-[15px] font-medium text-[#6B7280] transition hover:text-[#CC1A2B]">
                     {link.label}
                   </Link>
                 </li>
@@ -67,10 +67,10 @@ export default function FooterLimpio() {
 
           {/* — Servicios — */}
           <div className="lg:col-span-2">
-            <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#CC1A2B] mb-6">Servicios</p>
+            <p className="mb-6 text-[11px] font-bold uppercase tracking-[0.22em] text-[#CC1A2B]">Servicios</p>
             <ul className="space-y-3">
               {serviceHighlights.map((item) => (
-                <li key={item} className="text-sm font-medium text-[#6B7280]">
+                <li key={item} className="text-[15px] font-medium text-[#6B7280]">
                   {item}
                 </li>
               ))}
@@ -79,26 +79,26 @@ export default function FooterLimpio() {
 
           {/* — Contacto — */}
           <div className="lg:col-span-3">
-            <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#CC1A2B] mb-6">Sede Oficial</p>
+            <p className="mb-6 text-[11px] font-bold uppercase tracking-[0.22em] text-[#CC1A2B]">Sede oficial</p>
             <div className="space-y-6">
               <div className="flex items-start gap-3">
                 <MapPin className="h-4 w-4 text-[#CC1A2B] shrink-0 mt-1" />
-                <p className="text-sm text-[#6B7280]">
+                <p className="text-[15px] text-[#6B7280]">
                   Cruz Roja Filial San Miguel,<br />Región Metropolitana
                 </p>
               </div>
 
               <div className="space-y-4 pt-4 border-t border-[#FAF5F0]">
                 <div>
-                  <p className="text-[9px] font-black uppercase text-[#9CA3AF] mb-1">Paula Arce</p>
-                  <a href="https://wa.me/56982132679" className="text-sm font-bold text-[#1A1A1A] hover:text-[#CC1A2B] flex items-center gap-2">
+                  <p className="mb-1 text-[10px] font-black uppercase tracking-[0.14em] text-[#9CA3AF]">Paula Arce</p>
+                  <a href="https://wa.me/56982132679" className="flex items-center gap-2 text-[15px] font-semibold text-[#1A1A1A] hover:text-[#CC1A2B]">
                     <MessageCircle className="h-4 w-4" />
                     +56 9 8213 2679
                   </a>
                 </div>
                 <div>
-                  <p className="text-[9px] font-black uppercase text-[#9CA3AF] mb-1">Miriam Ponce</p>
-                  <a href="https://wa.me/56974112871" className="text-sm font-bold text-[#1A1A1A] hover:text-[#CC1A2B] flex items-center gap-2">
+                  <p className="mb-1 text-[10px] font-black uppercase tracking-[0.14em] text-[#9CA3AF]">Miriam Ponce</p>
+                  <a href="https://wa.me/56974112871" className="flex items-center gap-2 text-[15px] font-semibold text-[#1A1A1A] hover:text-[#CC1A2B]">
                     <MessageCircle className="h-4 w-4" />
                     +56 9 7411 2871
                   </a>
@@ -110,14 +110,14 @@ export default function FooterLimpio() {
 
         {/* — Barra inferior — */}
         <div className="mt-16 pt-8 border-t border-[#E8D5D7] flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-[10px] font-bold uppercase tracking-[0.1em] text-[#9CA3AF]">
+          <p className="text-center text-[8px] font-medium tracking-[0.02em] text-[#9CA3AF] sm:text-[9px] md:text-left">
             © {new Date().getFullYear()} Cruz Roja San Miguel · Todos los derechos reservados
           </p>
           <a
             href="https://nativecode.cl"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-[10px] font-black uppercase tracking-[0.15em] text-[#CC1A2B] transition hover:opacity-80"
+            className="text-[11px] font-black uppercase tracking-[0.12em] text-[#CC1A2B] transition hover:opacity-80"
           >
             Desarrollado por nativecode.cl
           </a>
