@@ -135,7 +135,7 @@ html {
 
   body {
     @apply bg-background text-foreground overflow-x-hidden;
-    font-family: var(--font-outfit), sans-serif;
+    font-family: var(--font-inter), sans-serif;
     line-height: 1.62;
     letter-spacing: -0.01em;
   }
@@ -146,10 +146,10 @@ html {
   h4,
   h5,
   h6 {
-    font-family: var(--font-lora), serif;
-    letter-spacing: -0.015em;
-    line-height: 1.15;
-    font-weight: 700;
+    font-family: var(--font-inter), sans-serif;
+    letter-spacing: -0.02em;
+    line-height: 1.12;
+    font-weight: 800;
   }
 
   img,
@@ -168,8 +168,11 @@ html {
   --brand-500: #CC1A2B;
   --brand-600: #B01824;
   --brand-700: #9E1020;
+  --brand-900: #5E0A13;
   --brand-ink: #1A1A1A;
-  background: #FAF5F0;
+  --surface-soft: #FFFFFF;
+  --surface-cream: #F6F2ED;
+  background: var(--surface-cream);
   color: var(--brand-ink);
 }
 
@@ -178,65 +181,39 @@ html {
   color: #ffffff;
 }
 
-/* Fondo crema para el body en tema Cruz Roja */
-.theme-white {
-  background-color: #FAF5F0;
-}
-
-/* Ajuste global de escala tipografica en vistas publicas */
-.theme-white h1,
-.theme-white [class*="text-6xl"] {
-  font-size: clamp(2rem, 5vw, 4rem) !important;
-  line-height: 1.1 !important;
-}
-
-.theme-white h2,
-.theme-white [class*="text-5xl"] {
-  font-size: clamp(1.75rem, 4vw, 3.25rem) !important;
-  line-height: 1.15 !important;
-}
-
-.theme-white h3,
-.theme-white [class*="text-4xl"] {
-  font-size: clamp(1.5rem, 3vw, 2.5rem) !important;
-  line-height: 1.2 !important;
-}
-
-.theme-white h4,
-.theme-white [class*="text-3xl"] {
-  font-size: clamp(1.25rem, 2.5vw, 1.85rem) !important;
-  line-height: 1.25 !important;
-}
-
-.theme-white [class*="text-2xl"] {
-  font-size: clamp(1.04rem, 1.25vw, 1.18rem) !important;
-  line-height: 1.28 !important;
-}
-
-.theme-white [class*="text-xl"] {
-  font-size: clamp(0.98rem, 1.05vw, 1.08rem) !important;
-  line-height: 1.34 !important;
-}
-
-.theme-white [class*="text-lg"] {
-  font-size: clamp(0.94rem, 0.95vw, 1rem) !important;
-  line-height: 1.4 !important;
-}
-
 .theme-white p,
 .theme-white li {
-  font-size: 1.1rem;
-  line-height: 1.7;
+  font-size: clamp(0.98rem, 0.26vw + 0.92rem, 1.04rem);
+  line-height: 1.68;
+  color: #5f6772;
 }
 
-.theme-white [class*="text-base"] {
-  font-size: 1.1rem !important;
-  line-height: 1.7 !important;
+.theme-white h1 {
+  font-size: clamp(2rem, 3.3vw, 3.25rem);
+  line-height: 1.1;
 }
 
-.theme-white [class*="text-sm"] {
-  font-size: 0.95rem !important;
-  line-height: 1.6 !important;
+.theme-white h2 {
+  font-size: clamp(1.65rem, 2.3vw, 2.45rem);
+  line-height: 1.14;
+}
+
+.theme-white h3 {
+  font-size: clamp(1.1rem, 1.25vw, 1.38rem);
+  line-height: 1.24;
+}
+
+.theme-white .eyebrow {
+  font-size: 0.72rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.theme-white .section-shell {
+  border: 1px solid rgba(204, 26, 43, 0.12);
+  background: #ffffff;
+  box-shadow: 0 24px 48px -40px rgba(94, 10, 19, 0.22);
 }
 
 .animate-reveal-up {
@@ -260,7 +237,7 @@ html {
 }
 
 .shadow-premium {
-  shadow: 0 20px 50px -20px rgba(204, 26, 43, 0.12);
+  box-shadow: 0 20px 50px -20px rgba(204, 26, 43, 0.12);
 }
 
 .letter-spacing-extra {
@@ -268,7 +245,7 @@ html {
 }
 
 .font-serif {
-  font-family: var(--font-lora), serif;
+  font-family: var(--font-inter), sans-serif;
 }
 
 .organic-shape {
@@ -276,9 +253,10 @@ html {
 }
 
 .text-editorial-title {
-  font-family: var(--font-lora), serif;
-  letter-spacing: -0.025em;
-  line-height: 1.1;
+  font-family: var(--font-inter), sans-serif;
+  letter-spacing: -0.03em;
+  line-height: 1.08;
+  font-weight: 800;
 }
 
 @keyframes reveal-up {

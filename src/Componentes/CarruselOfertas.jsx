@@ -12,9 +12,9 @@ import {
  */
 export function CarruselOfertas({
     title = "Trusted by thousands of businesses worldwide",
-    images = [],
+    images,
     intervalMs = 1800,
-    itemClassName = "basis-full sm:basis-1/2 lg:basis-1/4",
+    itemClassName = "basis-full sm:basis-1/2 lg:basis-1/3",
     imageClassName = "",
     ctaText = "",
     onCtaClick = undefined,
@@ -33,9 +33,22 @@ export function CarruselOfertas({
     // @ts-ignore
     const [api, setApi] = useState();
     const [current, setCurrent] = useState(0);
+    const hasMultiple = items.length > 1;
 
     useEffect(() => {
-        if (!api || !items.length) return;
+        if (!api) return;
+        const onSelect = () => setCurrent(api.selectedScrollSnap());
+        onSelect();
+        api.on("select", onSelect);
+        api.on("reInit", onSelect);
+        return () => {
+            api.off("select", onSelect);
+            api.off("reInit", onSelect);
+        };
+    }, [api]);
+
+    useEffect(() => {
+        if (!api || !hasMultiple) return;
 
         const id = setTimeout(() => {
             const lastIndex = api.scrollSnapList().length - 1;
@@ -49,7 +62,7 @@ export function CarruselOfertas({
         }, intervalMs);
 
         return () => clearTimeout(id);
-    }, [api, current, intervalMs, items.length]);
+    }, [api, current, intervalMs, hasMultiple]);
 
     return (
         <section className="w-full py-8 lg:py-12">
@@ -61,14 +74,14 @@ export function CarruselOfertas({
                         </h2>
                     ) : null}
 
-                    <Carousel setApi={setApi} className="w-full">
+                    <Carousel setApi={setApi} opts={{ loop: hasMultiple, align: "start" }} className="w-full">
                     <CarouselContent className="-ml-0 sm:-ml-6">
                             {items.map((img, index) => (
                                 <CarouselItem
                                     key={`${img.src}-${index}`}
                                     className={`${itemClassName} pl-0 sm:pl-6`}
                                 >
-                                    <div className="relative w-full overflow-hidden rounded-2xl border border-[#c7ebe3] bg-white">
+                                    <div className="relative w-full overflow-hidden rounded-2xl border border-[#E4D9DA] bg-white">
                                         <div className="relative h-56 w-full sm:h-64 md:h-72 lg:h-80">
                                             <img
                                                 src={img.src}
@@ -81,7 +94,6 @@ export function CarruselOfertas({
                                                     sm:transition-transform sm:duration-700 sm:hover:scale-105
                                                 `}
                                             />
-
                                             {ctaText && index === 0 && (
                                                 <button
                                                     type="button"
@@ -111,6 +123,21 @@ export function CarruselOfertas({
                             ))}
                         </CarouselContent>
                     </Carousel>
+
+                    {hasMultiple && (
+                        <div className="mt-2 flex justify-center gap-2">
+                            {items.map((_, idx) => (
+                                <button
+                                    key={idx}
+                                    onClick={() => api?.scrollTo(idx)}
+                                    aria-label={`Ir a la imagen ${idx + 1}`}
+                                    className={`rounded-full transition-all duration-300 ${
+                                        current === idx ? "h-2 w-8 bg-[#CC1A2B]" : "h-2 w-2 bg-[#CC1A2B]/25 hover:bg-[#CC1A2B]/45"
+                                    }`}
+                                />
+                            ))}
+                        </div>
+                    )}
 
                     {!items.length && (
                         <p className="text-sm text-muted-foreground">
