@@ -22,29 +22,31 @@ const lora = Lora({
   style: ["normal", "italic"],
 });
 
-export const metadataBase = new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://www.saludb.cl");
+export const metadataBase = new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://www.cruzrojasanmiguel.cl");
 
 export const metadata = {
   title: {
-    default: "SaludB | Salud Integral a Domicilio",
-    template: "%s | SaludB",
+    default: "Podología Cruz Roja San Miguel | Atención Clínica Especializada",
+    template: "%s | Cruz Roja San Miguel",
   },
   description:
-    "SaludB entrega atencion integral a domicilio en la Region Metropolitana con equipo interdisciplinario y coordinacion clinica continua.",
+    "Atención podológica clínica certificada en San Miguel. Especialistas Paula Arce y Miriam Ponce. Agenda tu hora online, tratamiento de uñas encarnadas, pie diabético y más.",
   keywords: [
-    "SaludB",
-    "salud a domicilio",
-    "atencion domiciliaria",
-    "kinesiologia",
-    "terapia ocupacional",
-    "fonoaudiologia",
-    "medicina general",
-    "geriatria",
-    "enfermeria",
-    "Region Metropolitana",
+    "podología San Miguel",
+    "podóloga San Miguel",
+    "Cruz Roja San Miguel",
+    "podología clínica",
+    "atención podológica",
+    "uñas encarnadas",
+    "pie diabético",
+    "callosidades",
+    "Paula Arce podóloga",
+    "Miriam Ponce podóloga",
+    "agenda podología",
+    "salud del pie San Miguel",
   ],
-  authors: [{ name: "SaludB", url: metadataBase.href }],
-  publisher: "SaludB",
+  authors: [{ name: "Cruz Roja San Miguel", url: metadataBase.href }],
+  publisher: "Cruz Roja San Miguel",
   robots: {
     index: true,
     follow: true,
@@ -56,23 +58,32 @@ export const metadata = {
     canonical: metadataBase.href,
   },
   icons: {
-    icon: "/logo_transparent.png",
-    shortcut: "/logo_transparent.png",
-    apple: "/logo_transparent.png",
+    icon: "/logosf.png",
+    shortcut: "/logosf.png",
+    apple: "/logosf.png",
   },
   openGraph: {
-    title: "SaludB | Salud Integral a Domicilio",
+    title: "Podología Cruz Roja San Miguel | Atención Clínica Especializada",
     description:
-      "Atencion personalizada y coordinada a domicilio para mejorar la funcionalidad y calidad de vida de cada paciente.",
+      "Especialistas certificadas en salud podológica. Agenda tu hora con Paula Arce o Miriam Ponce en Cruz Roja San Miguel.",
     url: metadataBase.href,
-    siteName: "SaludB",
+    siteName: "Cruz Roja San Miguel",
     locale: "es_CL",
     type: "website",
+    images: [
+      {
+        url: "/logosf1.png",
+        width: 1200,
+        height: 630,
+        alt: "Cruz Roja San Miguel - Podología Clínica",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "SaludB",
-    description: "Red de atencion domiciliaria integral en la Region Metropolitana.",
+    title: "Podología Cruz Roja San Miguel",
+    description: "Atención podológica clínica certificada en San Miguel. Agenda tu hora online.",
+    images: ["/logosf1.png"],
   },
 };
 
