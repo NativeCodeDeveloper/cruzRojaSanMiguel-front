@@ -154,9 +154,13 @@ export default function PortadaEditorialClinical() {
               ))}
 
               {/* Badge flotante en la imagen */}
-              <div className="absolute right-4 top-6 z-20 rounded-2xl bg-[#B01824] px-4 py-3 text-center shadow-lg">
-                <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-white/80">Podología</p>
-                <p className="text-base font-extrabold leading-tight text-white">Certificada</p>
+              <div className="absolute right-4 top-6 z-20 rounded-2xl bg-[#ffffff] px-4 py-3 text-center shadow-lg">
+                <img src="logosf.png" 
+                alt="logo"
+                height={90}
+                width={90}
+                className="object-center text-center"
+                />
               </div>
 
               {/* Pill inferior */}
@@ -170,7 +174,7 @@ export default function PortadaEditorialClinical() {
             {/* Card flotante en el borde izquierdo */}
             <div className="absolute -left-4 top-1/2 z-20 -translate-y-1/2 rounded-2xl border border-[#F0E0E0] bg-white px-4 py-3 shadow-[0_8px_28px_-6px_rgba(176,24,36,0.18)]">
               <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-[#B01824]">Experiencia</p>
-              <p className="mt-0.5 text-xl font-extrabold text-[#1A1A1A]">15+ años</p>
+              <p className="mt-0.5 text-xl font-extrabold text-[#1A1A1A]">10+ años</p>
             </div>
           </div>
 

@@ -12,7 +12,7 @@ export default function ContactoClinical() {
           <RevealOnScroll>
             <div className="text-center mb-16">
               <span className="eyebrow mb-5 block text-[#CC1A2B]">Atencion profesional</span>
-              <h1 className="text-editorial-title text-[#1A1A1A]">
+              <h1 className="!text-2xl font-bold text-[#1A1A1A] sm:!text-3xl">
                 Canales de Contacto
               </h1>
               <p className="mt-5 mx-auto max-w-xl text-sm leading-relaxed text-[#6B7280] sm:text-base">
@@ -26,7 +26,7 @@ export default function ContactoClinical() {
               <div className="group rounded-[2rem] border border-[#E8D5D7] bg-white p-7 md:p-9 shadow-sm transition-all hover:shadow-lg">
                 <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-10">
                   <div>
-                    <h2 className="text-editorial-title text-[#1A1A1A]">Paula Arce</h2>
+                    <h2 className="text-xl! font-bold text-[#1A1A1A]">Paula Arce</h2>
                     <p className="mt-3 mb-6 text-[11px] font-bold uppercase tracking-[0.24em] text-[#CC1A2B]">Podologa Clinica</p>
                     
                     <div className="flex w-fit items-center gap-4 rounded-2xl border border-[#CC1A2B]/10 bg-[#FAF5F0] px-5 py-3">
@@ -54,7 +54,7 @@ export default function ContactoClinical() {
               <div className="group rounded-[2rem] border border-[#E8D5D7] bg-white p-7 md:p-9 shadow-sm transition-all hover:shadow-lg">
                 <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-10">
                   <div>
-                    <h2 className="text-editorial-title text-[#1A1A1A]">Miriam Ponce</h2>
+                    <h2 className="text-xl! font-bold text-[#1A1A1A]">Miriam Ponce</h2>
                     <p className="mt-3 mb-6 text-[11px] font-bold uppercase tracking-[0.24em] text-[#CC1A2B]">Podologa Clinica</p>
                     
                     <div className="flex w-fit items-center gap-4 rounded-2xl border border-[#CC1A2B]/10 bg-[#FAF5F0] px-5 py-3">
