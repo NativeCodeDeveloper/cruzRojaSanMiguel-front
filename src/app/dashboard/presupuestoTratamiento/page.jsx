@@ -21,6 +21,7 @@ import {InputTextDinamic} from "@/Componentes/InputTextDinamic";
 
 
 export default function PresupuestoTratamiento() {
+    return null; // Presupuesto deshabilitado temporalmente
     const API = process.env.NEXT_PUBLIC_API_URL;
     const EMPRESA_NOMBRE = process.env.NEXT_PUBLIC_EMPRESA_NOMBRE || "Centro Integral ESSENZA";
     const [listaServicios, setListaServicios] = useState([]);
@@ -104,7 +105,7 @@ export default function PresupuestoTratamiento() {
             for (let i = 0; i < fontBytes.length; i++) binary += String.fromCharCode(fontBytes[i]);
             doc.addFileToVFS("Michroma-Regular.ttf", btoa(binary));
             doc.addFont("Michroma-Regular.ttf", "Michroma", "normal");
-        } catch (e) { /* fallback a helvetica */ }
+        } catch (e) { /* fallback a helvetica */}
 
         // ── Header con franja oscura ──
         doc.setFillColor(15, 23, 42); // slate-900
