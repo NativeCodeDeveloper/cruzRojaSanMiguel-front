@@ -1,24 +1,28 @@
 "use client";
 
 import RevealOnScroll from "@/Componentes/RevealOnScroll";
-import { Phone, Clock, ArrowRight } from "lucide-react";
+import { Phone, Clock, ArrowRight, Stethoscope, ShieldCheck, HeartPulse, BadgeCheck } from "lucide-react";
 
 const pillars = [
   {
     title: "Atención Clínica Integral",
     text: "Diagnóstico y tratamiento de afecciones del pie: callosidades, uñas encarnadas, onicomicosis y más.",
+    Icon: Stethoscope,
   },
   {
     title: "Seguridad Hospitalaria",
     text: "Trabajamos con estándares de esterilización y protocolos rigurosos de la Cruz Roja.",
+    Icon: ShieldCheck,
   },
   {
     title: "Cuidado de Pie Diabético",
     text: "Atención preventiva especializada para pacientes crónicos, evitando complicaciones graves.",
+    Icon: HeartPulse,
   },
   {
     title: "Confianza Institucional",
     text: "El respaldo de la Cruz Roja garantiza una atención profesional, ética y cercana.",
+    Icon: BadgeCheck,
   },
 ];
 
@@ -67,13 +71,14 @@ export default function Seccion1Clinical() {
 
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {pillars.map((item) => {
+              const Icon = item.Icon;
               return (
                 <RevealOnScroll key={item.title}>
                   <article className="group h-full rounded-[1.6rem] border border-[#E4D9DA] bg-white p-8 text-center transition-all hover:border-[#C9B4B7] hover:shadow-[0_24px_56px_-42px_rgba(26,26,26,0.28)]">
-                    <div className="mx-auto mb-8 flex h-20 w-20 items-center justify-center rounded-2xl bg-[#F6F2ED] p-4 transition-transform group-hover:scale-105">
-                      <img src="/logosf1.png" className="h-full w-full object-contain" alt="Cruz Roja Logo" />
+                    <div className="mx-auto mb-8 flex h-16 w-16 items-center justify-center rounded-2xl bg-[#FEF2F2] text-[#B01824] transition-transform group-hover:scale-105">
+                      <Icon className="h-8 w-8" strokeWidth={1.5} />
                     </div>
-                    <h3 className="mb-4 text-xl font-semibold tracking-tight text-[#1A1A1A]">{item.title}</h3>
+                    <h3 className="mb-3 text-base font-bold tracking-tight text-[#1A1A1A]">{item.title}</h3>
                     <p className="text-sm leading-relaxed text-[#5F6772]">{item.text}</p>
                   </article>
                 </RevealOnScroll>

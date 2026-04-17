@@ -41,7 +41,7 @@ const FEATURES = [
 const fallbackSlides = [
   {
     id: "fallback-1",
-    image: "/ac3.png",
+    image: "/imagen1.jpg",
     alt: "Podología Cruz Roja San Miguel",
     title: "Excelencia Podológica:",
     highlight: "El Legado de Cruz Roja San Miguel.",
@@ -49,7 +49,7 @@ const fallbackSlides = [
   },
   {
     id: "fallback-2",
-    image: "/Imagen 1.jpg",
+    image: "/Imagen1.jpg",
     alt: "Atención podológica San Miguel",
     title: "Cuidando tu bienestar",
     highlight: "a través de la Prevención.",
@@ -118,8 +118,15 @@ export default function PortadaEditorialClinical() {
   return (
     <section id="inicio" className="relative -mt-24 overflow-hidden bg-white">
 
-      {/* Fondo decorativo suave */}
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-[#FEF2F2] via-white to-[#F6F0F0]" />
+      {/* Fondo: imagen 0.jpg */}
+      <img
+        src="/piesfondo.webp"
+        alt="Fondo pies"
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 h-full w-full object-cover object-center"
+      />
+      {/* Overlay suave para legibilidad */}
+      <div className="pointer-events-none absolute inset-0 bg-white/80" />
 
       <div className="relative z-10 mx-auto w-full max-w-7xl px-5 pt-32 pb-10 md:px-8 lg:px-10">
 
@@ -236,13 +243,13 @@ export default function PortadaEditorialClinical() {
 
         {/* ── Fila de features ── */}
         <div className="mt-12 border-t border-[#F0E0E0] pt-10">
-          <div className="grid grid-cols-2 gap-6 sm:grid-cols-4">
+          <div className="grid grid-cols-2 gap-8 sm:grid-cols-4">
             {FEATURES.map((feat, i) => (
               <div key={i} className="flex flex-col items-center gap-3 text-center">
                 <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-[#FEF2F2] text-[#B01824]">
                   {feat.svg}
                 </div>
-                <p className="text-[13px] font-semibold leading-snug text-[#1A1A1A] whitespace-pre-line">
+                <p className="text-sm font-semibold leading-snug text-[#1A1A1A] whitespace-pre-line">
                   {feat.label}
                 </p>
               </div>
