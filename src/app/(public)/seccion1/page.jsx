@@ -36,7 +36,7 @@ const profesionales = [
     email: "paulapodologia@gmail.com",
     horario: "Sábados 09:00 – 13:40",
     bloque: "Bloques de 40 min",
-    exp: "Especialista en cirugía menor podológica y pie diabético."
+    exp: "Especialista en cirugía menor de uñas encarnadas."
   },
   {
     nombre: "Miriam Ponce",
