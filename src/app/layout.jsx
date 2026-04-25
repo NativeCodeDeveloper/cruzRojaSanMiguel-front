@@ -65,7 +65,7 @@ export const metadata = {
   openGraph: {
     title: "Podología Cruz Roja San Miguel | Atención Clínica Especializada",
     description:
-      "Especialistas certificadas en salud podológica. Agenda tu hora con Paula Arce o Miriam Ponce en Cruz Roja San Miguel.",
+      "Profesionales certificadas por Superintendencia de Salud y MINSAL. Agenda tu hora con Paula Arce o Miriam Ponce en Cruz Roja San Miguel.",
     url: metadataBase.href,
     siteName: "Cruz Roja San Miguel",
     locale: "es_CL",

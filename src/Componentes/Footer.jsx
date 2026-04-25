@@ -84,7 +84,7 @@ export default function FooterLimpio() {
               <div className="flex items-start gap-3">
                 <MapPin className="h-4 w-4 text-[#CC1A2B] shrink-0 mt-1" />
                 <p className="text-[15px] text-[#6B7280]">
-                  Cruz Roja Filial San Miguel,<br />Región Metropolitana
+                  Cruz Roja Filial San Miguel,<br />Llano Subercaseaux 4153 paradero 9,<br />Gran Avenida José Miguel Carrera,<br />San Miguel, Región Metropolitana.
                 </p>
               </div>
 
