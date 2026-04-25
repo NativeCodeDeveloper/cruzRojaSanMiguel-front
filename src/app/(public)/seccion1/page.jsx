@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import RevealOnScroll from "@/Componentes/RevealOnScroll";
 import { Phone, Clock, ArrowRight, Stethoscope, ShieldCheck, HeartPulse, BadgeCheck } from "lucide-react";
 
@@ -33,10 +34,8 @@ const profesionales = [
     foto: "/paulaarce.jpg",
     telefono: "+56 9 8213 2679",
     whatsapp: "https://wa.me/56982132679",
-    email: "paulapodologia@gmail.com",
     horario: "Sábados 09:00 – 13:40",
-    bloque: "Bloques de 40 min",
-    exp: "Especialista en cirugía menor de uñas encarnadas."
+    exp: "Especialista en cirugía menor de uñas encarnadas.",
   },
   {
     nombre: "Miriam Ponce",
@@ -44,25 +43,23 @@ const profesionales = [
     foto: "/miriamponce.jpg",
     telefono: "+56 9 7411 2871",
     whatsapp: "https://wa.me/56974112871",
-    email: "miriampr.podologia@gmail.com",
     horario: "Mar y Mié 14:30 – 17:30",
-    bloque: "Bloques de 30 min",
-    exp: "Experta en onicomicosis y tratamientos terapéuticos preventivos."
+    exp: "Especialista en cirugía menor de uñas encarnadas.",
   },
 ];
 
 export default function Seccion1Clinical() {
   return (
     <div className="overflow-hidden bg-[#F6F2ED]">
-      
-      {/* ─── Sección Pilares de Valor (Institutional Blue/Cream) ─── */}
+
+      {/* ─── Pilares de Valor ─── */}
       <section id="porque-elegirnos" className="scroll-mt-24 py-16 md:py-24">
         <div className="mx-auto max-w-7xl px-5 md:px-8 lg:px-10">
-          
+
           <div className="text-center mb-16">
             <RevealOnScroll>
-              <p className="eyebrow mb-4 text-[#B01824]">Excelencia Clinica</p>
-              <h2 className="text-editorial-title text-[#1A1A1A]">Por que confiar en nosotros</h2>
+              <p className="eyebrow mb-4 text-[#B01824]">Excelencia Clínica</p>
+              <h2 className="text-editorial-title text-[#1A1A1A]">Por qué confiar en nosotros</h2>
               <p className="mt-6 mx-auto max-w-2xl text-sm sm:text-base leading-relaxed text-[#5F6772]">
                 Salud podal con el rigor clínico y la ética profesional que certifica la Cruz Roja San Miguel.
               </p>
@@ -88,75 +85,78 @@ export default function Seccion1Clinical() {
         </div>
       </section>
 
-      {/* ─── Sección Equipo Profesional (Compact Editorial) ─── */}
+      {/* ─── Equipo Profesional ─── */}
       <section id="equipo" className="scroll-mt-24 rounded-t-[3rem] bg-white py-16 md:py-24">
-        <div className="mx-auto max-w-7xl px-5 md:px-8 lg:px-10">
-          
-          <div className="text-center mb-16">
+        <div className="mx-auto max-w-5xl px-5 md:px-8 lg:px-10">
+
+          {/* Header */}
+          <div className="text-center mb-14">
             <RevealOnScroll>
-              <p className="eyebrow mb-4 text-[#B01824]">Nuestro Legado</p>
-              <h2 className="text-editorial-title text-[#1A1A1A]">Equipo de Especialistas</h2>
-              <p className="mt-4 text-sm sm:text-base text-[#5F6772]">Enfoque humano y técnico para tu bienestar integral.</p>
+              <p className="eyebrow mb-3 text-[#B01824]">Nuestro Equipo</p>
+              <h2 className="text-editorial-title text-[#1A1A1A]">Especialistas Certificadas</h2>
+              <p className="mt-3 text-sm text-[#5F6772]">
+                Profesionales dedicadas al cuidado integral de la salud de tus pies.
+              </p>
             </RevealOnScroll>
           </div>
 
-          <div className="grid gap-12 sm:grid-cols-2 lg:max-w-5xl lg:mx-auto">
+          {/* Cards — mismo tamaño fijo garantizado */}
+          <div className="grid gap-5 sm:grid-cols-2">
             {profesionales.map((prof) => (
               <RevealOnScroll key={prof.nombre}>
-                <article className="flex flex-col group h-full">
-                  
-                  {/* Container slightly downsized */}
-                  <div className="relative mb-8 aspect-[5/6] overflow-hidden rounded-[2rem] border-[10px] border-[#F6F2ED] bg-[#FBF9F7] shadow-[0_20px_40px_-34px_rgba(26,26,26,0.3)]">
+                <article className="group flex flex-col h-full rounded-2xl border border-[#ECDCDC] bg-[#FDFAF9] overflow-hidden transition-all duration-300 hover:shadow-[0_12px_40px_-16px_rgba(176,24,36,0.18)] hover:border-[#D4AAAE]">
+
+                  {/* Foto — proporción fija */}
+                  <div className="relative w-full aspect-[4/3] bg-[#F6F2ED] overflow-hidden">
                     <img
                       src={prof.foto}
                       alt={prof.nombre}
-                      className="h-full w-full object-contain object-top pt-8 transition-transform duration-700 group-hover:scale-105"
+                      className="w-full h-full object-contain object-bottom transition-transform duration-700 group-hover:scale-[1.03]"
                     />
+                    {/* Gradiente inferior suave */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#FDFAF9]/80 via-transparent to-transparent" />
                   </div>
 
-                  <div className="px-2">
-                    <h3 className="mb-2 text-editorial-title text-3xl text-[#1A1A1A]">{prof.nombre}</h3>
-                    <p className="mb-6 text-[11px] font-bold uppercase tracking-[0.26em] text-[#CC1A2B]">
-                      {prof.rol}
-                    </p>
+                  {/* Info */}
+                  <div className="flex flex-col flex-1 p-6">
+                    {/* Nombre + rol */}
+                    <div className="mb-4">
+                      <h3 className="text-xl font-bold tracking-tight text-[#1A1A1A]">{prof.nombre}</h3>
+                      <p className="mt-1 text-[10px] font-bold uppercase tracking-[0.22em] text-[#CC1A2B]">{prof.rol}</p>
+                    </div>
 
-                    <p className="mb-10 min-h-[42px] text-sm font-medium leading-relaxed text-[#5F6772]">
+                    {/* Descripción */}
+                    <p className="text-[13px] leading-relaxed text-[#6B7280] flex-1 mb-5">
                       {prof.exp}
                     </p>
 
-                    <div className="mb-10 grid gap-8 border-t border-[#F0E8E8] pt-10">
-                      <div className="flex items-center gap-5">
-                        <Clock className="h-5 w-5 text-[#CC1A2B]" />
-                        <div>
-                          <p className="text-[11px] font-black uppercase text-[#1A1A1A]/40 mb-1">Disponibilidad</p>
-                          <p className="text-sm font-bold text-[#1A1A1A]">{prof.horario}</p>
-                        </div>
+                    {/* Datos de contacto */}
+                    <div className="flex flex-col gap-2 border-t border-[#F0E8E8] pt-4 mb-5">
+                      <div className="flex items-center gap-2.5">
+                        <Clock className="h-3.5 w-3.5 shrink-0 text-[#CC1A2B]" />
+                        <span className="text-[12px] font-medium text-[#1A1A1A]">{prof.horario}</span>
                       </div>
-                      
-                      <div className="flex items-center gap-5">
-                        <Phone className="h-5 w-5 text-[#CC1A2B]" />
-                        <div>
-                          <p className="text-[11px] font-black uppercase text-[#1A1A1A]/40 mb-1">WhatsApp</p>
-                          <p className="text-sm font-bold text-[#1A1A1A]">{prof.telefono}</p>
-                        </div>
+                      <div className="flex items-center gap-2.5">
+                        <Phone className="h-3.5 w-3.5 shrink-0 text-[#CC1A2B]" />
+                        <span className="text-[12px] font-medium text-[#1A1A1A]">{prof.telefono}</span>
                       </div>
                     </div>
 
-                    <a
-                      href={prof.whatsapp}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="group/link inline-flex items-center justify-center rounded-full bg-[#B01824] px-10 py-4 text-[11px] font-black uppercase tracking-[0.14em] text-white transition hover:bg-[#8F101E]"
+                    {/* CTA */}
+                    <Link
+                      href="/agendaProfesionales"
+                      className="group/link inline-flex w-full items-center justify-center gap-2 rounded-xl bg-[#1A1A1A] py-3 text-[11px] font-bold uppercase tracking-[0.14em] text-white transition-all duration-200 hover:bg-[#B01824]"
                     >
                       Agendar Hora
-                      <ArrowRight className="ml-3 h-4 w-4 transition-transform group-hover/link:translate-x-1" />
-                    </a>
+                      <ArrowRight className="h-3.5 w-3.5 transition-transform duration-200 group-hover/link:translate-x-0.5" />
+                    </Link>
                   </div>
 
                 </article>
               </RevealOnScroll>
             ))}
           </div>
+
         </div>
       </section>
 
