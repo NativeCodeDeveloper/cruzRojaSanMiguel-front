@@ -116,7 +116,7 @@ export default function Seccion2() {
         <RevealOnScroll>
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
             <div>
-              <p className="eyebrow text-[#B01824]">Servicios Podologicos</p>
+              <p className="eyebrow text-[#B01824]">Servicios Podológicos</p>
               <h2 className="mt-4 max-w-2xl text-editorial-title text-[#1A1A1A]">
                 Nuestros Tratamientos
               </h2>

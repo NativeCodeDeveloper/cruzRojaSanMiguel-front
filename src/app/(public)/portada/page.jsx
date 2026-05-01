@@ -191,7 +191,7 @@ export default function PortadaEditorialClinical() {
             {/* Eyebrow */}
             <div className="mb-5 flex items-center gap-3">
               <span className="h-px w-8 bg-[#B01824]" />
-              <p className="eyebrow text-[#B01824]">Podología clínica certificada</p>
+              <p className="eyebrow text-[#B01824]">Podología clínica</p>
             </div>
 
             {/* Título */}

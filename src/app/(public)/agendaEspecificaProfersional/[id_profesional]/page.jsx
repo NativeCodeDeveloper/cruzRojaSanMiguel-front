@@ -74,18 +74,9 @@ export default function CalendarioMensualHoras() {
     // Domingo: No disponible
     // Los inicios van separados por 70 minutos (60 atención + 10 descanso), pero los descansos no se muestran.
     const attentionSlots = useMemo(() => {
-        if (!fechaSeleccionada) return [];
+        if (!fechaSeleccionada || !nombreProfesional) return [];
 
-        const dayOfWeek = fechaSeleccionada.getDay(); // 0=domingo, 6=sábado
-
-        // Domingo no tiene horarios
-        if (dayOfWeek === 0) return [];
-
-        const slots = [];
-        const startMinutes = 9 * 60; // 09:00
-        // Lunes a Sábado hasta 22:00
-        const endMinutes = 22 * 60;
-        let cursor = startMinutes;
+        const dayOfWeek = fechaSeleccionada.getDay();
 
         const minutesToHHMM = (min) => {
             const hh = Math.floor(min / 60);
@@ -93,16 +84,36 @@ export default function CalendarioMensualHoras() {
             return `${String(hh).padStart(2, '0')}:${String(mm).padStart(2, '0')}`;
         };
 
-        while (cursor + 60 <= endMinutes) {
-            const attStart = cursor;
-            const attEnd = cursor + 60;
-            slots.push({start: minutesToHHMM(attStart), end: minutesToHHMM(attEnd)});
-            // avanzar 60 + 10 minutos (=70) para el siguiente inicio
-            cursor = attEnd + 10;
+        // Paula Arce: solo Sábados, bloques de 40 min
+        if (nombreProfesional.includes("Paula")) {
+            if (dayOfWeek !== 6) return [];
+            const horarios = ["09:00", "09:40", "10:20", "11:00", "11:40", "12:20", "13:00", "13:40"];
+            return horarios.map((start) => {
+                const [h, m] = start.split(":").map(Number);
+                return { start, end: minutesToHHMM(h * 60 + m + 40) };
+            });
         }
 
+        // Miriam Ponce: Martes y Miércoles, bloques de 30 min
+        if (nombreProfesional.includes("Miriam")) {
+            if (dayOfWeek !== 2 && dayOfWeek !== 3) return [];
+            const horarios = ["14:30", "15:00", "15:30", "16:00", "16:30", "17:00", "17:30"];
+            return horarios.map((start) => {
+                const [h, m] = start.split(":").map(Number);
+                return { start, end: minutesToHHMM(h * 60 + m + 30) };
+            });
+        }
+
+        // Genérico: Lun-Sáb 9:00-22:00, bloques de 60 min
+        if (dayOfWeek === 0) return [];
+        const slots = [];
+        let cursor = 9 * 60;
+        while (cursor + 60 <= 22 * 60) {
+            slots.push({ start: minutesToHHMM(cursor), end: minutesToHHMM(cursor + 60) });
+            cursor += 70;
+        }
         return slots;
-    }, [fechaSeleccionada]);
+    }, [fechaSeleccionada, nombreProfesional]);
 
     const addMinutesToHHMM = (hhmm, minutesToAdd) => {
         const [hh, mm] = hhmm.split(":").map(Number);
@@ -397,7 +408,7 @@ export default function CalendarioMensualHoras() {
                     </h1>
 
                     <p className="max-w-md text-sm leading-6 text-slate-500">
-                        Reserva tu hora odontológica en segundos. Selecciona fecha y un bloque horario disponible.
+                        Reserva tu hora de atención en segundos. Selecciona fecha y un bloque horario disponible.
                     </p>
                 </header>
 
@@ -491,10 +502,20 @@ export default function CalendarioMensualHoras() {
                         <div className="mt-5">
                             <div className="flex items-center justify-between">
                                 <h3 className="text-sm font-semibold text-slate-800">
-                                    Agenda (09:00–22:00)
+                                    {nombreProfesional.includes("Paula")
+                                        ? "Agenda (09:00–13:40)"
+                                        : nombreProfesional.includes("Miriam")
+                                        ? "Agenda (14:30–17:30)"
+                                        : "Agenda (09:00–22:00)"}
                                 </h3>
                                 <div className="flex items-center gap-3">
-                                    <p className="text-xs text-slate-500">Bloques de 60 min</p>
+                                    <p className="text-xs text-slate-500">
+                                        {nombreProfesional.includes("Paula")
+                                            ? "Bloques de 40 min"
+                                            : nombreProfesional.includes("Miriam")
+                                            ? "Bloques de 30 min"
+                                            : "Bloques de 60 min"}
+                                    </p>
                                     {checkingBlocked && (
                                         <div className="flex items-center gap-2 text-xs text-slate-500">
                                             <svg className="w-3 h-3 animate-spin text-slate-500"
@@ -600,11 +621,12 @@ export default function CalendarioMensualHoras() {
 
                 <footer className="mt-10 text-center text-xs text-slate-600">
                     <p>
-                        Odontología clínica integral con atención personalizada para cada paciente.
+                        Cruz Roja San Miguel · Atención personalizada para cada paciente.
                     </p>
-                    <p className="mt-2 text-[11px] text-slate-400">
-                        Horarios: Lun-Sáb 9:00-22:00 | Dom Cerrado
-                    </p>
+                    <div className="mt-2 text-[11px] text-slate-400 space-y-1">
+                        <p><span className="font-semibold text-slate-500">Paula Arce</span> · Sábados 09:00–13:40</p>
+                        <p><span className="font-semibold text-slate-500">Miriam Ponce</span> · Martes y Miércoles 14:30–17:30</p>
+                    </div>
                 </footer>
             </div>
         </div>

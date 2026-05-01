@@ -149,7 +149,7 @@ export default function DashboardLayout({ children }) {
 
 
 
-                            {/* — Presupuesto — */}
+                            {/* — Presupuesto —
                             <details className="group">
                                 <summary className="flex items-center justify-between px-2 py-1.5 text-[9px] font-medium text-white/35 hover:text-white/55 transition-colors duration-200 cursor-pointer list-none select-none tracking-[0.08em] uppercase">
                                     <span className="flex items-center gap-2">
@@ -163,9 +163,7 @@ export default function DashboardLayout({ children }) {
                                     </svg>
                                 </summary>
                                 <div className="mt-1 ml-1 space-y-0.5 border-l border-white/[0.06] pl-3">
-                                    {
-
-                                                                            <Link
+                                    <Link
                                         href="/dashboard/presupuestoTratamiento"
                                         className="group/link flex items-center gap-2.5 rounded-md px-2 py-[6px] text-[12.5px] font-light text-white/50 hover:text-white/90 hover:bg-white/[0.05] transition-all duration-200"
                                     >
@@ -198,16 +196,9 @@ export default function DashboardLayout({ children }) {
                                         <span className="h-[3px] w-[3px] rounded-full bg-white/15 group-hover/link:bg-violet-400 group-hover/link:shadow-[0_0_6px_rgba(139,92,246,0.6)] transition-all duration-200" />
                                         Solicitar Examenes
                                     </Link>
-
-
-
-
-
-
-
                                 </div>
                             </details>
-
+                            */}
 
 
                             {/* — Gestión de Contenido — */}

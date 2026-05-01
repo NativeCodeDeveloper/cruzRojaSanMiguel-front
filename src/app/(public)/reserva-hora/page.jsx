@@ -6,7 +6,6 @@ function ReservaHoraContent() {
     const searchParams = useSearchParams();
     const fechaInicio = searchParams.get('fecha') || '';
     const horaInicio = searchParams.get('hora') || '';
-    const emailPaciente = searchParams.get('email') || '';
 
   return (
     <section className="relative min-h-[70vh] w-full px-4 py-10 flex items-center justify-center bg-gradient-to-b from-slate-100 via-slate-50 to-slate-100">
@@ -118,7 +117,23 @@ function ReservaHoraContent() {
               </div>
             </div>
 
-            <div className="mt-6 rounded-2xl border border-slate-200 bg-slate-50 p-5">
+            <div className="mt-6 rounded-2xl border border-amber-200 bg-amber-50 p-5">
+              <div className="flex items-start gap-3">
+                <div className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-amber-100 border border-amber-200">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-amber-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 8v4m0 4h.01M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" />
+                  </svg>
+                </div>
+                <div>
+                  <p className="text-sm font-semibold text-amber-900">Forma de pago: Efectivo</p>
+                  <p className="mt-1 text-sm text-amber-800 leading-relaxed">
+                    El pago de la atención se realiza <span className="font-semibold">únicamente en efectivo</span> al momento de la consulta. Por favor lleva el monto exacto.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className="mt-4 rounded-2xl border border-slate-200 bg-slate-50 p-5">
               <p className="text-sm font-semibold text-slate-900">
                 ¡Tu cita ha sido confirmada!
               </p>

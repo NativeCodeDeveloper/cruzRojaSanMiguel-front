@@ -35,7 +35,7 @@ const profesionales = [
     telefono: "+56 9 8213 2679",
     whatsapp: "https://wa.me/56982132679",
     horario: "Sábados 09:00 – 13:40",
-    exp: "Especialista en cirugía menor de uñas encarnadas.",
+    exp: "Podóloga clínica, atención integral del pie, uñas encarnadas.",
   },
   {
     nombre: "Miriam Ponce",
@@ -44,7 +44,7 @@ const profesionales = [
     telefono: "+56 9 7411 2871",
     whatsapp: "https://wa.me/56974112871",
     horario: "Mar y Mié 14:30 – 17:30",
-    exp: "Especialista en cirugía menor de uñas encarnadas.",
+    exp: "Podóloga clínica, atención integral del pie, uñas encarnadas.",
   },
 ];
 
@@ -61,7 +61,7 @@ export default function Seccion1Clinical() {
               <p className="eyebrow mb-4 text-[#B01824]">Excelencia Clínica</p>
               <h2 className="text-editorial-title text-[#1A1A1A]">Por qué confiar en nosotros</h2>
               <p className="mt-6 mx-auto max-w-2xl text-sm sm:text-base leading-relaxed text-[#5F6772]">
-                Salud podal con el rigor clínico y la ética profesional que certifica la Cruz Roja San Miguel.
+                Salud podal con el rigor clínico y la ética profesional que certifican la Superintendencia de Salud y MINSAL.
               </p>
             </RevealOnScroll>
           </div>
@@ -93,7 +93,7 @@ export default function Seccion1Clinical() {
           <div className="text-center mb-14">
             <RevealOnScroll>
               <p className="eyebrow mb-3 text-[#B01824]">Nuestro Equipo</p>
-              <h2 className="text-editorial-title text-[#1A1A1A]">Especialistas Certificadas</h2>
+              <h2 className="text-editorial-title text-[#1A1A1A]">Profesionales Certificadas por Superintendencia de Salud y MINSAL</h2>
               <p className="mt-3 text-sm text-[#5F6772]">
                 Profesionales dedicadas al cuidado integral de la salud de tus pies.
               </p>
