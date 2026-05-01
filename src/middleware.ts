@@ -2,7 +2,7 @@
 
 
 
-
+/*
 
 
 // frontend/src/middleware.ts
@@ -21,9 +21,9 @@ matcher: ['/dashboard/:path*'], // o simplemente [] si quieres que no aplique a 
 
 
 
+*/
 
 
-/*
 
 
 
@@ -73,4 +73,4 @@ export const config = {
 }
 
 
-*/
+
