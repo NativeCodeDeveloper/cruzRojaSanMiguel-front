@@ -5,7 +5,6 @@ import ShadcnButton2 from "@/Componentes/shadcnButton2";
 import {useAgenda} from "@/ContextosGlobales/AgendaContext";
 import {toast} from "react-hot-toast";
 import {useParams, useRouter} from "next/navigation";
-import {SelectDinamic} from "@/Componentes/SelectDinamic";
 
 export default function FormularioReservaProfesional() {
     const API = process.env.NEXT_PUBLIC_API_URL;
@@ -18,8 +17,6 @@ export default function FormularioReservaProfesional() {
     const [listaTarifasProfesionales, setListaTarifasProfesionales] = useState([]);
 
     const [profesionalSeleccionado, setProfesionalSeleccionado] = useState("");
-    const [servicioSeleccionado, setServicioSeleccionado] = useState("");
-    const [tarifaSeleccionadaIndex, setTarifaSeleccionadaIndex] = useState("");
     const[descripcionProfesional, setDescripcionProfesional] = useState("");
 
     const {id_profesional} = useParams();
@@ -74,6 +71,9 @@ export default function FormularioReservaProfesional() {
                 const respustaBackend = await res.json();
                 if(respustaBackend){
                     setListaTarifasProfesionales(respustaBackend);
+                    if (respustaBackend.length > 0) {
+                        setTotalPago(respustaBackend[0].precio);
+                    }
 
                 }else{
                     return toast.error('Error al cargar los Tarifas y Servicios Profesionales, por favor intente nuevamente .');
@@ -216,8 +216,9 @@ export default function FormularioReservaProfesional() {
         id_profesional
     ){
         try {
+            const emailNormalizado = email?.trim() ? email.trim() : "no indicado";
 
-            if (!nombrePaciente || !apellidoPaciente || !rut || !telefono || !email || !fechaInicio || !horaInicio || !horaFinalizacion || !id_profesional) {
+            if (!nombrePaciente || !apellidoPaciente || !rut || !telefono || !fechaInicio || !horaInicio || !horaFinalizacion || !id_profesional) {
                 toast.error('Debe llenar todos los campos');
                 return false;
             }
@@ -231,7 +232,7 @@ export default function FormularioReservaProfesional() {
                     apellidoPaciente,
                     rut,
                     telefono,
-                    email,
+                    email: emailNormalizado,
                     fechaInicio,
                     horaInicio,
                     fechaFinalizacion,
@@ -291,33 +292,6 @@ export default function FormularioReservaProfesional() {
                         e.preventDefault();
                     }}
                 >
-                    {/* Servicio */}
-                    <div>
-                        <h2 className="text-sm font-semibold uppercase tracking-wider text-slate-400">Servicio</h2>
-                        <div className="mt-1 h-px w-full bg-gradient-to-r from-slate-200 via-slate-100 to-transparent"></div>
-                        <div className="mt-4">
-                            <label className="mb-1.5 block text-xs font-semibold text-slate-700">Motivo de consulta</label>
-                            <SelectDinamic
-                                value={tarifaSeleccionadaIndex}
-                                onChange={(e) => {
-                                    const index = e.target.value;
-                                    setTarifaSeleccionadaIndex(index);
-                                    const tarifa = listaTarifasProfesionales[index];
-                                    if (tarifa) {
-                                        setTotalPago(tarifa.precio);
-                                        setServicioSeleccionado(tarifa.nombreServicio);
-                                    }
-                                }}
-                                placeholder="Seleccione un servicio"
-                                options={listaTarifasProfesionales.map((tarifa, index) => ({
-                                    value: index,
-                                    label: `${tarifa.nombreServicio} - ${formatoCLP.format(tarifa.precio)}`
-                                }))}
-                                className={tarifaSeleccionadaIndex !== "" ? "border-emerald-400 bg-emerald-50/50 font-medium text-slate-900" : ""}
-                            />
-                        </div>
-                    </div>
-
                     {/* Datos personales */}
                     <div>
                         <h2 className="text-sm font-semibold uppercase tracking-wider text-slate-400">Datos personales</h2>
@@ -354,11 +328,11 @@ export default function FormularioReservaProfesional() {
                                 />
                             </div>
                             <div>
-                                <label className="mb-1.5 block text-xs font-semibold text-slate-700">Correo electrónico</label>
+                                <label className="mb-1.5 block text-xs font-semibold text-slate-700">Correo electrónico <span className="font-normal text-slate-400">(opcional)</span></label>
                                 <ShadcnInput
                                     value={email}
                                     onChange={(e) => setEmail(e.target.value)}
-                                    placeholder="ejemplo@correo.cl"
+                                    placeholder="Si no tiene, puede dejarlo en blanco"
                                     className="w-full"
                                 />
                             </div>
