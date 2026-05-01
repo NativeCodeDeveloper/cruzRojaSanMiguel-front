@@ -109,7 +109,7 @@ export default function Calendario() {
                 overscroll-behavior: contain !important;
             }
             .rbc-time-view .rbc-timeslot-group {
-                min-height: 44px !important;
+                min-height: 56px !important;
             }
             .rbc-time-slot {
                 transition: background-color 120ms ease !important;
@@ -145,20 +145,20 @@ export default function Calendario() {
                 box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.16) !important;
             }
             .rbc-month-view .rbc-event {
-                min-height: 0 !important; height: auto !important; padding: 2px 3px !important;
-                line-height: 1.1 !important; white-space: normal !important; overflow: visible !important; word-break: break-word !important;
-                font-size: 60% !important;
+                min-height: 0 !important; height: auto !important; padding: 3px 5px !important;
+                line-height: 1.25 !important; white-space: normal !important; overflow: visible !important; word-break: break-word !important;
+                font-size: 80% !important;
             }
             .rbc-time-view .rbc-event {
-                min-height: 0 !important; padding: 1px 2px !important;
-                line-height: 1.1 !important; white-space: normal !important; overflow: hidden !important; word-break: break-word !important;
-                font-size: 72% !important;
+                min-height: 0 !important; padding: 3px 5px !important;
+                line-height: 1.25 !important; white-space: normal !important; overflow: hidden !important; word-break: break-word !important;
+                font-size: 90% !important;
             }
             .rbc-month-view .rbc-day-slot { min-height: 80px !important; }
             .rbc-row-segment { z-index: 1 !important; }
-            .rbc-event-label, .rbc-event-content { white-space: normal !important; overflow: visible !important; word-break: break-word !important; font-size: 60% !important; }
+            .rbc-event-label, .rbc-event-content { white-space: normal !important; overflow: visible !important; word-break: break-word !important; font-size: 80% !important; }
             .rbc-time-view .rbc-event-label,
-            .rbc-time-view .rbc-event-content { font-size: 72% !important; }
+            .rbc-time-view .rbc-event-content { font-size: 90% !important; }
             .rbc-event-label { display: none !important; }
             @media (max-width: 767px) {
                 .rbc-time-view,
@@ -645,8 +645,8 @@ export default function Calendario() {
                     overflow: 'hidden',
                     textOverflow: 'clip',
                     lineHeight: esVistaMes ? '1' : '1.3',
-                    padding: esVistaMes ? '2px 4px' : '6px 8px',
-                    fontSize: esVistaMes ? '0.45rem' : '0.32rem',
+                    padding: esVistaMes ? '3px 5px' : '6px 8px',
+                    fontSize: esVistaMes ? '0.65rem' : '0.7rem',
                     boxSizing: 'border-box',
                     borderRadius: '0px',
                     backgroundColor: 'rgba(107, 114, 128, 0.28)',
@@ -671,8 +671,8 @@ export default function Calendario() {
                 overflow: 'hidden',
                 textOverflow: 'ellipsis',
                 lineHeight: '1',
-                padding: esVistaMes ? '2px 4px' : '0',
-                fontSize: esVistaMes ? '0.45rem' : '0.32rem',
+                padding: esVistaMes ? '3px 5px' : '4px 6px',
+                fontSize: esVistaMes ? '0.65rem' : '0.7rem',
                 boxSizing: 'border-box',
                 borderRadius: '0px',
                 backgroundColor: paletteReserva.backgroundColor,
@@ -707,7 +707,7 @@ export default function Calendario() {
     const EventComponent = ({event}) => (
         <div
             title={obtenerTooltipEvento(event)}
-            className="truncate text-[9px] leading-none w-full h-full flex items-center gap-1 px-[2px]"
+            className="truncate text-[11px] leading-tight w-full h-full flex items-center gap-1 px-[3px]"
             style={{whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis'}}
         >
             {event.tipo === "bloqueo" && (
@@ -720,7 +720,7 @@ export default function Calendario() {
     );
 
     const TitleOnlyEvent = ({event}) => (
-        <div title={obtenerTooltipEvento(event)} className="truncate text-[9px] leading-none font-medium w-full flex items-center gap-1" style={{whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis'}}>
+        <div title={obtenerTooltipEvento(event)} className="truncate text-[11px] leading-tight font-medium w-full flex items-center gap-1" style={{whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis'}}>
             {event.tipo === "bloqueo" && (
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
