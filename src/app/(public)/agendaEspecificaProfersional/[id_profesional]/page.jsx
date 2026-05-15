@@ -160,7 +160,8 @@ export default function CalendarioMensualHoras() {
 
         // Si ya hay hora seleccionada, mantenla y recalcula las cadenas en el contexto
         if (horaInicio) {
-            const horaFinAuto = addMinutesToHHMM(horaInicio, 60);
+            const duracionConsulta = nombreProfesional.includes("Paula") ? 40 : nombreProfesional.includes("Miriam") ? 30 : 60;
+            const horaFinAuto = addMinutesToHHMM(horaInicio, duracionConsulta);
             setHoraFin(horaFinAuto);
             setFechaInicio(fechaYMD);
             setFechaFinalizacion(fechaYMD);
@@ -195,7 +196,8 @@ export default function CalendarioMensualHoras() {
             }
         }
 
-        const horaFinAuto = addMinutesToHHMM(hora, 60);
+        const duracionConsulta = nombreProfesional.includes("Paula") ? 40 : nombreProfesional.includes("Miriam") ? 30 : 60;
+        const horaFinAuto = addMinutesToHHMM(hora, duracionConsulta);
 
         setHoraInicio(hora);
         setHoraFin(horaFinAuto);
