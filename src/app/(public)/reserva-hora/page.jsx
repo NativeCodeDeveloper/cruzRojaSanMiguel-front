@@ -6,6 +6,7 @@ function ReservaHoraContent() {
     const searchParams = useSearchParams();
     const fechaInicio = searchParams.get('fecha') || '';
     const horaInicio = searchParams.get('hora') || '';
+    const duracion = searchParams.get('duracion') || '60';
 
   return (
     <section className="relative min-h-[70vh] w-full px-4 py-10 flex items-center justify-center bg-gradient-to-b from-slate-100 via-slate-50 to-slate-100">
@@ -96,7 +97,7 @@ function ReservaHoraContent() {
                   </div>
                   <div className="flex-1">
                     <p className="text-sm font-semibold text-slate-900">Duración</p>
-                    <p className="text-sm text-slate-600">60 Minutos</p>
+                    <p className="text-sm text-slate-600">{duracion} Minutos</p>
                   </div>
                 </div>
 

@@ -197,7 +197,8 @@ export default function FormularioReservaProfesional() {
         setRut("");
         setTelefono("");
         setEmail("");
-        router.push(`/reserva-hora?fecha=${fechaInicio}&hora=${horaInicio}`);
+        const duracion = profesionalSeleccionado.includes("Paula") ? 40 : profesionalSeleccionado.includes("Miriam") ? 30 : 60;
+        router.push(`/reserva-hora?fecha=${fechaInicio}&hora=${horaInicio}&duracion=${duracion}`);
     }
 
 
